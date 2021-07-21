@@ -1,7 +1,8 @@
-package Maze.Gui;
+package maze.gui;
 
-import java.awt.Graphics;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +22,8 @@ public class MazeGridPanel extends JPanel {
 
     @Override
     public Dimension getPreferredSize() {
+        // +1 so the borders will be visible on the bottom and right of the cell
         return new Dimension(Maze.WIDTH + 1, Maze.HEIGHT + 1);
-    }
-
-    public void generateMaze(int algorithmIndex) {
-
     }
 
     @Override
@@ -34,5 +32,7 @@ public class MazeGridPanel extends JPanel {
         for (Cell cell : grid) {
             cell.draw(graphics);
         }
+
+        grid.get(Maze.START_CELL).colorCell(graphics, Color.GREEN);
     }
 }
