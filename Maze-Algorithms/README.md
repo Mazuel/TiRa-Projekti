@@ -15,4 +15,4 @@ The `JAVA PROJECTS` view allows you to manage your dependencies. More details ca
 
 ## Project
 
-General idea of this project is to implement a few algorithms (to be decided) for maze generation and also possibly a few algorithms for solving those mazes
+General idea of this project is to implement a few algorithms (to be decided later) for maze generation and also possibly a few algorithms for solving those mazes, with some kind of visualization
