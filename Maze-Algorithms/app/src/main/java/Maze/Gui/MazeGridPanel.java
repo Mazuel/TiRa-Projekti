@@ -6,14 +6,14 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
+import maze.algorithms.BinaryTreeGenerator;
 import maze.util.CellList;
 
 public class MazeGridPanel extends JPanel {
 
-    private CellList grid;
+    private CellList grid = new CellList();
 
     public MazeGridPanel(int rows, int cols) {
-        this.grid = new CellList();
         for (int x = 0; x < rows; x++) {
             for (int y = 0; y < cols; y++) {
                 grid.add(new Cell(x, y));
@@ -35,6 +35,10 @@ public class MazeGridPanel extends JPanel {
         }
 
         grid.get(Maze.START_CELL).colorCell(graphics, Color.GRAY);
+    }
+
+    public void generate() {
+        new BinaryTreeGenerator(this);
     }
 
     public CellList getGrid() {

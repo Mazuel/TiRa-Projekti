@@ -15,8 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import maze.util.CellList;
-
 public class Maze {
 
     public static final int WIDTH = 800;
@@ -41,7 +39,6 @@ public class Maze {
                 }
                 showGui();
             }
-
         });
     }
 
@@ -91,6 +88,10 @@ public class Maze {
 
         cards.setOpaque(false);
         cards.add(runButton, "Suorita");
+
+        runButton.addActionListener(event -> {
+            mazeGridPanel.generate();
+        });
 
         return cards;
     }

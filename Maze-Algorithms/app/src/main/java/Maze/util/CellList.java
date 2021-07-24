@@ -8,7 +8,7 @@ public class CellList {
 
     private static final int DEFAULT_SIZE = 10;
 
-    private Cell cells[];
+    private Cell[] cells;
 
     public CellList() {
         cells = new Cell[DEFAULT_SIZE];
@@ -42,6 +42,13 @@ public class CellList {
 
     public int size() {
         return size;
+    }
+
+    public boolean contains(Cell cell) {
+        for (int i = 0; i < size; i++) {
+            return cells[i].equals(cell);
+        }
+        return false;
     }
 
     private void ensureCapacity() {
