@@ -3,16 +3,17 @@ package maze.gui;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JPanel;
 
+import maze.util.CellList;
+
 public class MazeGridPanel extends JPanel {
 
-    private List<Cell> grid = new ArrayList<Cell>();
+    private CellList grid;
 
     public MazeGridPanel(int rows, int cols) {
+        this.grid = new CellList();
         for (int x = 0; x < rows; x++) {
             for (int y = 0; y < cols; y++) {
                 grid.add(new Cell(x, y));
@@ -22,17 +23,28 @@ public class MazeGridPanel extends JPanel {
 
     @Override
     public Dimension getPreferredSize() {
-        // +1 so the borders will be visible on the bottom and right of the cell
+        // +1 jotta solujen reunat näkyvät myös alhaalla ja oikealla
         return new Dimension(Maze.WIDTH + 1, Maze.HEIGHT + 1);
     }
 
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-        for (Cell cell : grid) {
-            cell.draw(graphics);
+        for (int i = 0; i < grid.size(); i++) {
+            grid.get(i).draw(graphics);
         }
 
-        grid.get(Maze.START_CELL).colorCell(graphics, Color.GREEN);
+        grid.get(Maze.START_CELL).colorCell(graphics, Color.GRAY);
+    }
+
+    public CellList getGrid() {
+        return grid;
+    }
+
+    public void setGrid(CellList grid) {
+        this.grid = grid;
+    }
+
+    public void setCurrent(Cell cell) {
     }
 }

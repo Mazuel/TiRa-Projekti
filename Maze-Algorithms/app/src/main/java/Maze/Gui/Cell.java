@@ -43,4 +43,9 @@ public class Cell {
         graphics.setColor(color);
         graphics.fillRect(x2, y2, Maze.CELL_SIZE, Maze.CELL_SIZE);
     }
+
+    @Override
+    public String toString() {
+        return String.format("(%d, %d)", x, y);
+    }
 }

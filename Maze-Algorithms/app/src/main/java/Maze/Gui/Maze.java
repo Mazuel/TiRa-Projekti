@@ -3,14 +3,19 @@
  */
 package maze.gui;
 
-import java.awt.*;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.EventQueue;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import maze.util.CellList;
 
 public class Maze {
 
@@ -49,8 +54,12 @@ public class Maze {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mazeBorder = createMazeBorder(WIDTH, HEIGHT);
+        MazeGridPanel mazeGridPanel = createMazeGridPanel(WIDTH, HEIGHT);
+
+        mazeBorder.add(mazeGridPanel);
 
         mainContainer.add(mazeBorder);
+        mainContainer.add(createCards(mazeGridPanel));
 
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);
@@ -62,14 +71,27 @@ public class Maze {
     }
 
     private JPanel createMazeBorder(int rows, int cols) {
-        MazeGridPanel mazeGrid = new MazeGridPanel(rows, cols);
-        mazeGrid.setBackground(Color.GRAY);
-
         JPanel mazeBorder = new JPanel();
         mazeBorder.setBounds(0, 0, WIDTH + CELL_SIZE, HEIGHT + CELL_SIZE);
         mazeBorder.setBorder(BorderFactory.createEmptyBorder(CELL_SIZE, CELL_SIZE, CELL_SIZE, CELL_SIZE));
-
-        mazeBorder.add(mazeGrid);
         return mazeBorder;
+    }
+
+    private MazeGridPanel createMazeGridPanel(int rows, int cols) {
+        MazeGridPanel mazeGrid = new MazeGridPanel(rows, cols);
+        mazeGrid.setBackground(Color.GRAY);
+
+        return mazeGrid;
+    }
+
+    private JPanel createCards(MazeGridPanel mazeGridPanel) {
+        JButton runButton = new JButton("Suorita");
+        CardLayout cardLayout = new CardLayout(30, 30);
+        JPanel cards = new JPanel(cardLayout);
+
+        cards.setOpaque(false);
+        cards.add(runButton, "Suorita");
+
+        return cards;
     }
 }
