@@ -1,3 +1,3 @@
-# Maze-Algorithms with Java Swing
+# Labyrintti algoritmeja Javalla
 
-Visualization of different maze generating algorithms with java swing
+Erilaisten algoritmien visualisointia labyrtinttien generoinnissa
