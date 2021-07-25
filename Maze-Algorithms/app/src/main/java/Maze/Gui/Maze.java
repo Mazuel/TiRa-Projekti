@@ -18,7 +18,8 @@ import javax.swing.UnsupportedLookAndFeelException;
 public class Maze {
 
     public static final int WIDTH = 800;
-    public static final int HEIGHT = WIDTH;
+    public static final int HEIGHT = WIDTH; // Sama kuin leveys, jotta voidaan pitää näkymä symmetrisenä. Helpottaa
+                                            // labyrintin käsittelyä
     public static final int CELL_SIZE = WIDTH / 32;
     public static final int START_CELL = 0;
 
@@ -29,7 +30,6 @@ public class Maze {
     }
 
     public Maze() {
-
         // Jaetaan solujen leveys solun koolla, jotta voidaan luoda oikea määrä soluja
         // käsiteltävään listaan ja pidetään rivien ja kolumnien määrä samana, jotta
         // symmetrisyys säilyy
@@ -65,10 +65,6 @@ public class Maze {
 
         mainContainer.add(mazeBorder);
         mainContainer.add(createCards(mazeGridPanel));
-
-        System.out.println(columns);
-        System.out.println(mazeGridPanel.getGrid().size());
-        // System.out.println(mazeGridPanel.getGrid());
 
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);

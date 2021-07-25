@@ -13,7 +13,7 @@ import maze.util.Direction;
 
 public class BinaryTreeGenerator {
 
-    private int renderSpeed = 0; // Millisekuntia
+    private int renderSpeed = 3; // Millisekuntia
     private int index;
 
     private final CellList grid;
@@ -34,7 +34,6 @@ public class BinaryTreeGenerator {
                 if (index >= 0) {
                     generate();
                 } else {
-                    currentCell = null;
                     timer.stop();
                 }
                 mazeGridPanel.repaint();
@@ -45,39 +44,23 @@ public class BinaryTreeGenerator {
 
     // Algoritmi
     private void generate() {
-        boolean topNeighbour = grid.contains(currentCell.getNeighbour(grid, Direction.TOP));
-        boolean leftNeighbour = grid.contains(currentCell.getNeighbour(grid, Direction.LEFT));
+        Cell topNeighbour = currentCell.getNeighbour(grid, Direction.TOP);
+        Cell leftNeighbour = currentCell.getNeighbour(grid, Direction.LEFT);
 
-        if (topNeighbour && leftNeighbour) {
-            removeWallsDirection(randomDirection.nextInt(2));
-        } else if (leftNeighbour) {
-            removeWallsDirection(0);
-        } else if (topNeighbour) {
-            removeWallsDirection(1);
+        if (topNeighbour != null && leftNeighbour != null) {
+            int direction = randomDirection.nextInt(2);
+            if (direction == 0) {
+                currentCell.removeWall(leftNeighbour);
+            } else {
+                currentCell.removeWall(topNeighbour);
+            }
+        } else if (leftNeighbour != null) {
+            currentCell.removeWall(leftNeighbour);
+        } else if (topNeighbour != null) {
+            currentCell.removeWall(topNeighbour);
         }
         currentCell.setVisited(true);
 
         currentCell = grid.get(index--);
-    }
-
-    // 0 = Poista vasen seinä
-    // 1 = Poista ylä seinä
-    private void removeWallsDirection(int direction) {
-        CellList neighbours = currentCell.getNeighbours(grid);
-        if (direction == 0) {
-            for (int i = 0; i < neighbours.size(); i++) {
-                Cell neighbour = neighbours.get(i);
-                if (neighbour.getY() + 1 == currentCell.getY()) {
-                    currentCell.removeWall(neighbour);
-                }
-            }
-        } else {
-            for (int i = 0; i < neighbours.size(); i++) {
-                Cell neighbour = neighbours.get(i);
-                if (neighbour.getX() + 1 == currentCell.getX()) {
-                    currentCell.removeWall(neighbour);
-                }
-            }
-        }
     }
 }
