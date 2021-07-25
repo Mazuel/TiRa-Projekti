@@ -33,8 +33,6 @@ public class MazeGridPanel extends JPanel {
         for (int i = 0; i < grid.size(); i++) {
             grid.get(i).draw(graphics);
         }
-
-        grid.get(Maze.START_CELL).colorCell(graphics, Color.GRAY);
     }
 
     public void generate() {
