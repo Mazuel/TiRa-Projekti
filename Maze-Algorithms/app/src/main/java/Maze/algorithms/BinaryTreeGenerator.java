@@ -50,11 +50,9 @@ public class BinaryTreeGenerator {
 
         if (topNeighbour && leftNeighbour) {
             removeWallsDirection(randomDirection.nextInt(2));
-        }
-        if (leftNeighbour) {
+        } else if (leftNeighbour) {
             removeWallsDirection(0);
-        }
-        if (topNeighbour) {
+        } else if (topNeighbour) {
             removeWallsDirection(1);
         }
         currentCell.setVisited(true);

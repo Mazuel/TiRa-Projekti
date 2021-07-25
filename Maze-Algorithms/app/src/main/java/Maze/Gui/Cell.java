@@ -108,13 +108,13 @@ public class Cell {
     public Cell getNeighbour(CellList cells, Direction direction) {
         switch (direction) {
             case TOP:
-                return getNeighbourIfExists(cells, new Cell(x, y + 1));
+                return getNeighbourIfExists(cells, new Cell(x, y - 1));
             case RIGHT:
                 return getNeighbourIfExists(cells, new Cell(x + 1, y));
             case LEFT:
                 return getNeighbourIfExists(cells, new Cell(x - 1, y));
             case BOTTOM:
-                return getNeighbourIfExists(cells, new Cell(x, y - 1));
+                return getNeighbourIfExists(cells, new Cell(x, y + 1));
             default:
                 return null;
         }
