@@ -6,4 +6,4 @@
 
 ## Dokumentit
 
-- [Määrittelydokumentti]()
+- [Määrittelydokumentti](Dokumentit/maarittelydokumentti.md)
