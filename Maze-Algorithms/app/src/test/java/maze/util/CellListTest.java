@@ -31,4 +31,15 @@ public class CellListTest {
         assertTrue(cellList.size() == 50);
     }
 
+    @Test
+    public void shouldContainCell() {
+        CellList cellList = new CellList();
+
+        for (int i = 0; i < 50; i++) {
+            cellList.add(new Cell(i, i));
+        }
+
+        assertTrue(cellList.contains(new Cell(12, 12)));
+    }
+
 }

@@ -48,7 +48,4 @@ public class MazeGridPanel extends JPanel {
     public void setGrid(CellList grid) {
         this.grid = grid;
     }
-
-    public void setCurrent(Cell cell) {
-    }
 }

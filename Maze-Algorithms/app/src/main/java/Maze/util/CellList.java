@@ -23,7 +23,7 @@ public class CellList {
     }
 
     public Cell get(int index) {
-        if (index >= size || index < 0) {
+        if (index > size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
         }
         return cells[index];
@@ -45,8 +45,13 @@ public class CellList {
     }
 
     public boolean contains(Cell cell) {
+        if (cell == null) {
+            return false;
+        }
         for (int i = 0; i < size; i++) {
-            return cells[i].equals(cell);
+            if (cells[i].equals(cell)) {
+                return true;
+            }
         }
         return false;
     }
@@ -58,6 +63,15 @@ public class CellList {
             copy[i] = cells[i];
         }
         cells = copy;
+    }
+
+    public int indexOf(Cell cell) {
+        for (int i = 0; i < size; i++) {
+            if (cells[i].equals(cell)) {
+                return i;
+            }
+        }
+        return -1;
     }
 
     @Override

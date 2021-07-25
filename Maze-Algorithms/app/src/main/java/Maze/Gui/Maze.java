@@ -22,11 +22,19 @@ public class Maze {
     public static final int CELL_SIZE = WIDTH / 32;
     public static final int START_CELL = 0;
 
+    private int columns, rows;
+
     public static void main(String[] args) {
         new Maze();
     }
 
     public Maze() {
+
+        // Jaetaan solujen leveys solun koolla, jotta voidaan luoda oikea määrä soluja
+        // käsiteltävään listaan ja pidetään rivien ja kolumnien määrä samana, jotta
+        // symmetrisyys säilyy
+        columns = Math.floorDiv(WIDTH, CELL_SIZE);
+        rows = columns;
 
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -50,13 +58,17 @@ public class Maze {
         mainFrame.setContentPane(mainContainer);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel mazeBorder = createMazeBorder(WIDTH, HEIGHT);
-        MazeGridPanel mazeGridPanel = createMazeGridPanel(WIDTH, HEIGHT);
+        JPanel mazeBorder = createMazeBorder(rows, columns);
+        MazeGridPanel mazeGridPanel = createMazeGridPanel(rows, columns);
 
         mazeBorder.add(mazeGridPanel);
 
         mainContainer.add(mazeBorder);
         mainContainer.add(createCards(mazeGridPanel));
+
+        System.out.println(columns);
+        System.out.println(mazeGridPanel.getGrid().size());
+        // System.out.println(mazeGridPanel.getGrid());
 
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);
@@ -67,15 +79,15 @@ public class Maze {
         createGUI().setVisible(true);
     }
 
-    private JPanel createMazeBorder(int rows, int cols) {
+    private JPanel createMazeBorder(int rows, int columns) {
         JPanel mazeBorder = new JPanel();
         mazeBorder.setBounds(0, 0, WIDTH + CELL_SIZE, HEIGHT + CELL_SIZE);
         mazeBorder.setBorder(BorderFactory.createEmptyBorder(CELL_SIZE, CELL_SIZE, CELL_SIZE, CELL_SIZE));
         return mazeBorder;
     }
 
-    private MazeGridPanel createMazeGridPanel(int rows, int cols) {
-        MazeGridPanel mazeGrid = new MazeGridPanel(rows, cols);
+    private MazeGridPanel createMazeGridPanel(int rows, int columns) {
+        MazeGridPanel mazeGrid = new MazeGridPanel(rows, columns);
         mazeGrid.setBackground(Color.GRAY);
 
         return mazeGrid;
