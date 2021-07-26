@@ -61,6 +61,8 @@ public class BinaryTreeGenerator {
         }
         currentCell.setVisited(true);
 
-        currentCell = grid.get(index--);
+        if (index - 1 >= 0) {
+            currentCell = grid.get(--index);
+        }
     }
 }
