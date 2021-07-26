@@ -2,8 +2,6 @@ package maze.gui;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Color;
-
 import javax.swing.JPanel;
 
 import maze.algorithms.BinaryTreeGenerator;
@@ -35,8 +33,12 @@ public class MazeGridPanel extends JPanel {
         }
     }
 
-    public void generate() {
-        new BinaryTreeGenerator(this);
+    public void generate(AlgorithmOption algorithmOptions) {
+        System.out.println(algorithmOptions);
+        switch (algorithmOptions) {
+            case BINARY_TREE: new BinaryTreeGenerator(this);
+            default:
+        }
     }
 
     public CellList getGrid() {

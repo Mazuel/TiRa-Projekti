@@ -10,6 +10,7 @@ import java.awt.EventQueue;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
@@ -23,7 +24,7 @@ public class Maze {
     public static final int CELL_SIZE = WIDTH / 32;
     public static final int START_CELL = 0;
 
-    private int columns, rows;
+    private int mazeColumns, mazeRows;
 
     public static void main(String[] args) {
         new Maze();
@@ -33,8 +34,8 @@ public class Maze {
         // Jaetaan solujen leveys solun koolla, jotta voidaan luoda oikea määrä soluja
         // käsiteltävään listaan ja pidetään rivien ja kolumnien määrä samana, jotta
         // symmetrisyys säilyy
-        columns = Math.floorDiv(WIDTH, CELL_SIZE);
-        rows = columns;
+        mazeColumns = Math.floorDiv(WIDTH, CELL_SIZE);
+        mazeRows = mazeColumns;
 
         EventQueue.invokeLater(new Runnable() {
             @Override
@@ -58,13 +59,16 @@ public class Maze {
         mainFrame.setContentPane(mainContainer);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel mazeBorder = createMazeBorder(rows, columns);
-        MazeGridPanel mazeGridPanel = createMazeGridPanel(rows, columns);
+        JPanel mazeBorder = createMazeBorder(mazeRows, mazeColumns);
+        MazeGridPanel mazeGridPanel = createMazeGridPanel(mazeRows, mazeColumns);
+        JComboBox<AlgorithmComboItem> algorithmOptions = createAlgorithmOptions();
 
-        mazeBorder.add(mazeGridPanel);
+        mazeBorder.add(mazeGridPanel); 
 
         mainContainer.add(mazeBorder);
-        mainContainer.add(createCards(mazeGridPanel));
+        mainContainer.add(algorithmOptions);
+        mainContainer.add(createButtonLayout(mazeGridPanel, algorithmOptions));
+
 
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);
@@ -75,32 +79,44 @@ public class Maze {
         createGUI().setVisible(true);
     }
 
-    private JPanel createMazeBorder(int rows, int columns) {
+    private JPanel createMazeBorder(int mazeRows, int mazeColumns) {
         JPanel mazeBorder = new JPanel();
         mazeBorder.setBounds(0, 0, WIDTH + CELL_SIZE, HEIGHT + CELL_SIZE);
         mazeBorder.setBorder(BorderFactory.createEmptyBorder(CELL_SIZE, CELL_SIZE, CELL_SIZE, CELL_SIZE));
         return mazeBorder;
     }
 
-    private MazeGridPanel createMazeGridPanel(int rows, int columns) {
-        MazeGridPanel mazeGrid = new MazeGridPanel(rows, columns);
+    private MazeGridPanel createMazeGridPanel(int mazeRows, int mazeColumns) {
+        MazeGridPanel mazeGrid = new MazeGridPanel(mazeRows, mazeColumns);
         mazeGrid.setBackground(Color.GRAY);
 
         return mazeGrid;
     }
 
-    private JPanel createCards(MazeGridPanel mazeGridPanel) {
-        JButton runButton = new JButton("Suorita");
-        CardLayout cardLayout = new CardLayout(30, 30);
-        JPanel cards = new JPanel(cardLayout);
+    private JComboBox<AlgorithmComboItem> createAlgorithmOptions() {
+        JComboBox<AlgorithmComboItem> algorithmOptions = new JComboBox<AlgorithmComboItem>();
+        algorithmOptions.setBounds(0, 0, CELL_SIZE, CELL_SIZE);
+        algorithmOptions.setBorder(BorderFactory.createEmptyBorder(0, CELL_SIZE, 0, CELL_SIZE));
 
-        cards.setOpaque(false);
-        cards.add(runButton, "Suorita");
+        algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.BINARY_TREE, "Binääri puu"));
+        algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.ALDOUS_BRODER, "Aldous-Broder"));
+        return algorithmOptions;
+    }
+
+    private JPanel createButtonLayout(MazeGridPanel mazeGridPanel, JComboBox<AlgorithmComboItem> algorithmOptions) {
+        JButton runButton = new JButton("Suorita");
+        CardLayout buttonLayout = new CardLayout(30, 30);
+        JPanel buttons = new JPanel(buttonLayout);
+
+        buttons.setOpaque(false);
+        buttons.add(runButton, "Suorita");
+
 
         runButton.addActionListener(event -> {
-            mazeGridPanel.generate();
+            AlgorithmComboItem item = (AlgorithmComboItem) algorithmOptions.getSelectedItem();
+            mazeGridPanel.generate(item.getAlgorithm());
         });
 
-        return cards;
+        return buttons;
     }
 }
