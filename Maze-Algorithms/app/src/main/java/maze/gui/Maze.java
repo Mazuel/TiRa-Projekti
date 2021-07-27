@@ -52,7 +52,7 @@ public class Maze {
     }
 
     private JFrame createGUI() {
-        JFrame mainFrame = new JFrame("Java Maze Generator");
+        JFrame mainFrame = new JFrame("Labyrinttin algoritmeja");
 
         JPanel mainContainer = new JPanel();
         mainContainer.setLayout(new BoxLayout(mainContainer, BoxLayout.Y_AXIS));
