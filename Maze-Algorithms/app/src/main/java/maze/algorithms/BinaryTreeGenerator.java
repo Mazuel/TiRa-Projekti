@@ -13,12 +13,14 @@ import maze.util.Direction;
 
 public class BinaryTreeGenerator {
 
-    private int renderSpeed = 3; // Millisekuntia
+    private int renderSpeed = 5; // Millisekuntia
     private int index;
 
     private final CellList grid;
     private Cell currentCell;
+    private Cell previousCell;
     private Random randomDirection = new Random();
+    private boolean generated = false;
 
     public BinaryTreeGenerator(MazeGridPanel mazeGridPanel) {
         this.grid = mazeGridPanel.getGrid();
@@ -31,12 +33,14 @@ public class BinaryTreeGenerator {
         timer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (index >= 0) {
+                if (!generated) {
                     generate();
+                    generated = grid.isAllVisited();
                 } else {
                     timer.stop();
                 }
                 mazeGridPanel.repaint();
+                // previousCell.setCursor(false);
             }
         });
         timer.start();
@@ -44,6 +48,11 @@ public class BinaryTreeGenerator {
 
     // Algoritmi
     private void generate() {
+
+        if (previousCell != null) {
+            previousCell.setCursor(false);
+        }
+        
         Cell topNeighbour = currentCell.getNeighbour(grid, Direction.TOP);
         Cell leftNeighbour = currentCell.getNeighbour(grid, Direction.LEFT);
 
@@ -60,9 +69,13 @@ public class BinaryTreeGenerator {
             currentCell.removeWall(topNeighbour);
         }
         currentCell.setVisited(true);
+        currentCell.setCursor(true);
 
         if (index - 1 >= 0) {
+            previousCell = currentCell;
             currentCell = grid.get(--index);
+        } else {
+            currentCell.setCursor(false);
         }
     }
 }

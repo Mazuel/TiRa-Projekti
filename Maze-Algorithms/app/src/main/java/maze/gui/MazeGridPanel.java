@@ -38,8 +38,12 @@ public class MazeGridPanel extends JPanel {
     public void generate(AlgorithmOption algorithm) {
         System.out.println(algorithm);
         switch (algorithm) {
-            case BINARY_TREE: new BinaryTreeGenerator(this);
-            case ALDOUS_BRODER: new AldousBroderGenerator(this);
+            case BINARY_TREE:
+                new BinaryTreeGenerator(this);
+                break;
+            case ALDOUS_BRODER:
+                new AldousBroderGenerator(this);
+                break;
             default:
         }
     }

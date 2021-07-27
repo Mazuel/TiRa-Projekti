@@ -11,6 +11,7 @@ public class Cell {
     private boolean visited = false;
     private boolean[] walls = { true, true, true, true };
     private final Color wallColor = Color.BLACK;
+    private boolean cursor = false;
 
     public Cell(int x, int y) {
         this.x = x;
@@ -24,11 +25,13 @@ public class Cell {
         graphics.setColor(Color.DARK_GRAY);
         graphics.fillRect(xLocation, yLocation, Maze.CELL_SIZE, Maze.CELL_SIZE);
 
-        if (visited) {
+        if (cursor) {
+            graphics.setColor(Color.RED);
+            graphics.fillRect(xLocation, yLocation, Maze.CELL_SIZE, Maze.CELL_SIZE);
+        } else if (visited) {
             graphics.setColor(Color.YELLOW);
             graphics.fillRect(xLocation, yLocation, Maze.CELL_SIZE, Maze.CELL_SIZE);
         }
-
         // Seinien väri
         graphics.setColor(wallColor);
 
@@ -124,10 +127,10 @@ public class Cell {
     }
 
     public void colorCell(Graphics graphics, Color color) {
-        int cellWidth = x * Maze.CELL_SIZE;
-        int cellHeight = y * Maze.CELL_SIZE;
+        int locationX = x * Maze.CELL_SIZE;
+        int locationY = y * Maze.CELL_SIZE;
         graphics.setColor(color);
-        graphics.fillRect(cellWidth, cellHeight, Maze.CELL_SIZE, Maze.CELL_SIZE);
+        graphics.fillRect(locationX, locationY, Maze.CELL_SIZE, Maze.CELL_SIZE);
     }
 
     @Override
@@ -177,4 +180,13 @@ public class Cell {
     public void setY(int y) {
         this.y = y;
     }
+
+    public boolean isCursor() {
+        return cursor;
+    }
+
+    public void setCursor(boolean cursor) {
+        this.cursor = cursor;
+    }
+
 }

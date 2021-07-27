@@ -42,6 +42,15 @@ public class CellList {
         return size;
     }
 
+    public boolean isAllVisited() {
+        for (int i = 0; i < size; i++) {
+            if (!cells[i].isVisited()) {
+                return false;
+            } 
+        }
+        return true;
+    }
+
     public boolean contains(Cell cell) {
         if (cell == null) {
             return false;
