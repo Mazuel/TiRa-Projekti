@@ -5,13 +5,12 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-import maze.gui.Cell;
 import maze.gui.MazeGridPanel;
 
 public class AldousBroderGenerator {
     
     private final int STEP_TIME_UNIT = 5;
-    private Cell currentCell;
+    // private Cell currentCell;
     private int index;
 
     public AldousBroderGenerator(MazeGridPanel gridPanel) {

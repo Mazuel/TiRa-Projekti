@@ -6,8 +6,8 @@ import java.util.Random;
 
 import javax.swing.Timer;
 
-import maze.gui.Cell;
 import maze.gui.MazeGridPanel;
+import maze.util.Cell;
 import maze.util.CellList;
 import maze.util.Direction;
 

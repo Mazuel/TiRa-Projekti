@@ -4,8 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import maze.gui.Cell;
-
 public class CellListTest {
 
     @Test

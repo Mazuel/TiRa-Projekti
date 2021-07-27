@@ -52,7 +52,7 @@ public class Maze {
     }
 
     private JFrame createGUI() {
-        JFrame mainFrame = new JFrame("Labyrinttin algoritmeja");
+        JFrame mainFrame = new JFrame("Labyrintti algoritmeja");
 
         JPanel mainContainer = new JPanel();
         mainContainer.setLayout(new BoxLayout(mainContainer, BoxLayout.Y_AXIS));
@@ -89,7 +89,6 @@ public class Maze {
     private MazeGridPanel createMazeGridPanel(int mazeRows, int mazeColumns) {
         MazeGridPanel mazeGrid = new MazeGridPanel(mazeRows, mazeColumns);
         mazeGrid.setBackground(Color.GRAY);
-
         return mazeGrid;
     }
 
@@ -110,7 +109,6 @@ public class Maze {
 
         buttons.setOpaque(false);
         buttons.add(runButton, "Suorita");
-
 
         runButton.addActionListener(event -> {
             AlgorithmComboItem item = (AlgorithmComboItem) algorithmOptions.getSelectedItem();

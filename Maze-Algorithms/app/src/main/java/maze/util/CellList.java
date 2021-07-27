@@ -1,7 +1,5 @@
 package maze.util;
 
-import maze.gui.Cell;
-
 public class CellList {
 
     private int size = 0;

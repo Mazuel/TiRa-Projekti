@@ -1,10 +1,9 @@
-package maze.gui;
+package maze.util;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
-import maze.util.CellList;
-import maze.util.Direction;
+import maze.gui.Maze;
 
 public class Cell {
     private int x, y;
@@ -19,39 +18,39 @@ public class Cell {
     }
 
     public void draw(Graphics graphics) {
-        int cellWidth = x * Maze.CELL_SIZE;
-        int cellHeight = y * Maze.CELL_SIZE;
+        int xLocation = x * Maze.CELL_SIZE;
+        int yLocation = y * Maze.CELL_SIZE;
 
         graphics.setColor(Color.DARK_GRAY);
-        graphics.fillRect(cellWidth, cellHeight, Maze.CELL_SIZE, Maze.CELL_SIZE);
+        graphics.fillRect(xLocation, yLocation, Maze.CELL_SIZE, Maze.CELL_SIZE);
 
         if (visited) {
             graphics.setColor(Color.YELLOW);
-            graphics.fillRect(cellWidth, cellHeight, Maze.CELL_SIZE, Maze.CELL_SIZE);
+            graphics.fillRect(xLocation, yLocation, Maze.CELL_SIZE, Maze.CELL_SIZE);
         }
 
         // Seinien väri
         graphics.setColor(wallColor);
 
-        // Oikea
+        // Ylä
         if (walls[0]) {
-            graphics.drawLine(cellWidth, cellHeight, cellWidth + Maze.CELL_SIZE, cellHeight);
+            graphics.drawLine(xLocation, yLocation, xLocation + Maze.CELL_SIZE, yLocation);
         }
 
-        // Ylä
+        // Oikea
         if (walls[1]) {
-            graphics.drawLine(cellWidth + Maze.CELL_SIZE, cellHeight, cellWidth + Maze.CELL_SIZE,
-                    cellHeight + Maze.CELL_SIZE);
+            graphics.drawLine(xLocation + Maze.CELL_SIZE, yLocation, xLocation + Maze.CELL_SIZE,
+                    yLocation + Maze.CELL_SIZE);
         }
 
         // Ala
         if (walls[2]) {
-            graphics.drawLine(cellWidth + Maze.CELL_SIZE, cellHeight + Maze.CELL_SIZE, cellWidth,
-                    cellHeight + Maze.CELL_SIZE);
+            graphics.drawLine(xLocation + Maze.CELL_SIZE, yLocation + Maze.CELL_SIZE, xLocation,
+                    yLocation + Maze.CELL_SIZE);
         }
         // Vasen
         if (walls[3]) {
-            graphics.drawLine(cellWidth, cellHeight + Maze.CELL_SIZE, cellWidth, cellHeight);
+            graphics.drawLine(xLocation, yLocation + Maze.CELL_SIZE, xLocation, yLocation);
         }
     }
 
@@ -64,17 +63,21 @@ public class Cell {
         int y = this.y - neighbour.getY();
 
         if (x == 1) {
+            // Vasen seinä
             walls[3] = false;
             neighbour.walls[1] = false;
         } else if (x == -1) {
+            // Oikea seinä
             walls[1] = false;
             neighbour.walls[3] = false;
         }
 
         if (y == 1) {
+            // Ylä seinä
             walls[0] = false;
             neighbour.walls[2] = false;
         } else if (y == -1) {
+            // Ala seinä
             walls[2] = false;
             neighbour.walls[0] = false;
         }
@@ -141,6 +144,14 @@ public class Cell {
     @Override
     public String toString() {
         return "(" + x + ", " + y + ")";
+    }
+
+    public boolean[] getWalls() {
+        return walls;
+    }
+
+    public void setWalls(boolean[] walls) {
+        this.walls = walls;
     }
 
     public boolean isVisited() {

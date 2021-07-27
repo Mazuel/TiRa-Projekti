@@ -4,7 +4,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
+import maze.algorithms.AldousBroderGenerator;
 import maze.algorithms.BinaryTreeGenerator;
+import maze.util.Cell;
 import maze.util.CellList;
 
 public class MazeGridPanel extends JPanel {
@@ -21,7 +23,7 @@ public class MazeGridPanel extends JPanel {
 
     @Override
     public Dimension getPreferredSize() {
-        // +1 jotta solujen reunat näkyvät myös alhaalla ja oikealla
+        // +1 jotta solujen 'seinät' näkyvät myös oikealla ja alhaalla
         return new Dimension(Maze.WIDTH + 1, Maze.HEIGHT + 1);
     }
 
@@ -33,10 +35,11 @@ public class MazeGridPanel extends JPanel {
         }
     }
 
-    public void generate(AlgorithmOption algorithmOptions) {
-        System.out.println(algorithmOptions);
-        switch (algorithmOptions) {
+    public void generate(AlgorithmOption algorithm) {
+        System.out.println(algorithm);
+        switch (algorithm) {
             case BINARY_TREE: new BinaryTreeGenerator(this);
+            case ALDOUS_BRODER: new AldousBroderGenerator(this);
             default:
         }
     }
