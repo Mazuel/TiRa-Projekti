@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javax.swing.Timer;
 
+import maze.gui.Maze;
 import maze.gui.MazeGridPanel;
 import maze.util.Cell;
 import maze.util.CellList;
@@ -38,6 +39,7 @@ public class BinaryTreeGenerator {
                     generated = grid.isAllVisited();
                 } else {
                     timer.stop();
+                    Maze.algorithmInAction = false;
                 }
                 mazeGridPanel.repaint();
                 // previousCell.setCursor(false);

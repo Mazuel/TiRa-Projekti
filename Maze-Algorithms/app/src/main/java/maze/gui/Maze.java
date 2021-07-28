@@ -23,6 +23,7 @@ public class Maze {
                                             // labyrintin käsittelyä
     public static final int CELL_SIZE = WIDTH / 32;
     public static final int START_CELL = 0;
+    public static boolean algorithmInAction = false;
 
     private int mazeColumns, mazeRows;
 
@@ -111,8 +112,13 @@ public class Maze {
         buttons.add(runButton, "Suorita");
 
         runButton.addActionListener(event -> {
-            AlgorithmComboItem item = (AlgorithmComboItem) algorithmOptions.getSelectedItem();
-            mazeGridPanel.generate(item.getAlgorithm());
+            if (!algorithmInAction) {
+                algorithmInAction = true;
+                AlgorithmComboItem item = (AlgorithmComboItem) algorithmOptions.getSelectedItem();
+                mazeGridPanel.generate(item.getAlgorithm());
+            } else {
+                System.out.println("Algoritmia suoritetaan jo!");
+            }
         });
 
         return buttons;

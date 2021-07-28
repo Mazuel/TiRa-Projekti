@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javax.swing.Timer;
 
+import maze.gui.Maze;
 import maze.gui.MazeGridPanel;
 import maze.util.Cell;
 import maze.util.CellList;
@@ -39,6 +40,7 @@ public class AldousBroderGenerator {
                     generated = grid.isAllVisited();
                 } else {
                     currentCell.setCursor(false);
+                    Maze.algorithmInAction = false;
                     stepTimer.stop();
                 }
                 gridPanel.repaint();
