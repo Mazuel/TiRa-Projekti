@@ -64,12 +64,11 @@ public class Maze {
         MazeGridPanel mazeGridPanel = createMazeGridPanel(mazeRows, mazeColumns);
         JComboBox<AlgorithmComboItem> algorithmOptions = createAlgorithmOptions();
 
-        mazeBorder.add(mazeGridPanel); 
+        mazeBorder.add(mazeGridPanel);
 
         mainContainer.add(mazeBorder);
         mainContainer.add(algorithmOptions);
         mainContainer.add(createButtonLayout(mazeGridPanel, algorithmOptions));
-
 
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);
@@ -100,6 +99,7 @@ public class Maze {
 
         algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.BINARY_TREE, "Binääri puu"));
         algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.ALDOUS_BRODER, "Aldous-Broder"));
+        algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.PRIMS, "Primin algoritmi"));
         return algorithmOptions;
     }
 

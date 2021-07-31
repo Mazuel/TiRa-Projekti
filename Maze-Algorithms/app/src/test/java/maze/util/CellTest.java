@@ -1,5 +1,6 @@
 package maze.util;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -91,4 +92,42 @@ public class CellTest {
         assertTrue(bottomNeighbourWalls[3]);
     }
 
+    @Test
+    public void shouldReturnAllNeighbours() {
+        CellList testGrid = new CellList();
+        Cell currentCell = new Cell(10, 10);
+        Cell topNeighbour = new Cell(10, 9);
+        Cell bottomNeighbour = new Cell(10, 11);
+        Cell leftNeighbour = new Cell(11, 10);
+        Cell rightNeighbour = new Cell(9, 10);
+
+        testGrid.add(currentCell);
+        testGrid.add(topNeighbour);
+        testGrid.add(bottomNeighbour);
+        testGrid.add(leftNeighbour);
+        testGrid.add(rightNeighbour);
+
+        assertEquals(4, currentCell.getNeighbours(testGrid).size());
+    }
+
+    @Test
+    public void shouldReturnOnlyVisitedNeighbours() {
+
+        CellList testGrid = new CellList();
+        Cell currentCell = new Cell(10, 10);
+        Cell topNeighbour = new Cell(10, 9);
+        Cell bottomNeighbour = new Cell(10, 11);
+        Cell leftNeighbour = new Cell(11, 10);
+        Cell rightNeighbour = new Cell(9, 10);
+
+        leftNeighbour.setVisited(true);
+
+        testGrid.add(currentCell);
+        testGrid.add(topNeighbour);
+        testGrid.add(bottomNeighbour);
+        testGrid.add(leftNeighbour);
+        testGrid.add(rightNeighbour);
+
+        assertEquals(1, currentCell.getVisitedNeighbours(testGrid).size());
+    }
 }

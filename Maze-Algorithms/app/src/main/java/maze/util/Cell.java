@@ -111,6 +111,33 @@ public class Cell {
         return neighbours;
     }
 
+    public CellList getUnvisitedNeighbours(CellList cells) {
+        CellList neighbours = getNeighbours(cells);
+        CellList unvisitedNeighbours = new CellList();
+
+        for (int i = 0; i < neighbours.size(); i++) {
+            Cell neighbour = neighbours.get(i);
+            if (neighbour.notVisited()) {
+                unvisitedNeighbours.add(neighbour);
+            }
+        }
+
+        return unvisitedNeighbours;
+    }
+
+    public CellList getVisitedNeighbours(CellList cells) {
+        CellList neighbours = getNeighbours(cells);
+        CellList visitedNeighbours = new CellList();
+
+        for (int i = 0; i < neighbours.size(); i++) {
+            Cell neighbour = neighbours.get(i);
+            if (neighbour.isVisited()) {
+                visitedNeighbours.add(neighbour);
+            }
+        }
+        return visitedNeighbours;
+    }
+
     public Cell getNeighbour(CellList cells, Direction direction) {
         switch (direction) {
             case TOP:
@@ -155,6 +182,10 @@ public class Cell {
 
     public void setWalls(boolean[] walls) {
         this.walls = walls;
+    }
+
+    public boolean notVisited() {
+        return !visited;
     }
 
     public boolean isVisited() {

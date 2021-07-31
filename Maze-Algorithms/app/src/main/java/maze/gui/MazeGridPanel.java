@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 
 import maze.algorithms.AldousBroderGenerator;
 import maze.algorithms.BinaryTreeGenerator;
+import maze.algorithms.PrimsGenerator;
 import maze.util.Cell;
 import maze.util.CellList;
 
@@ -43,6 +44,9 @@ public class MazeGridPanel extends JPanel {
                 break;
             case ALDOUS_BRODER:
                 new AldousBroderGenerator(this);
+                break;
+            case PRIMS:
+                new PrimsGenerator(this);
                 break;
             default:
         }

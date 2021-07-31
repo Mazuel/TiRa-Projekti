@@ -42,7 +42,6 @@ public class BinaryTreeGenerator {
                     Maze.algorithmInAction = false;
                 }
                 mazeGridPanel.repaint();
-                // previousCell.setCursor(false);
             }
         });
         timer.start();
@@ -54,7 +53,7 @@ public class BinaryTreeGenerator {
         if (previousCell != null) {
             previousCell.setCursor(false);
         }
-        
+
         Cell topNeighbour = currentCell.getNeighbour(grid, Direction.TOP);
         Cell leftNeighbour = currentCell.getNeighbour(grid, Direction.LEFT);
 
