@@ -8,3 +8,6 @@
   - [x] Täytyy tehdä jokin esto suorita -nappulalle, jos algoritmi on jo toiminnassa
   - [x] Jonkinlaisen 'kursorin' lisäys, jotta näkee selvästi missä solussa algoritmi menee
   - [x] Aldous-Broder algoritmin lisäys
+  - [x] Primin algoritmin lisäys
+
+Seuraavalla viikolla tarkoitus keskittyä enemmän koodin sisäiseen laatuun ja ui:n käyttäjäystävällisyyteen
