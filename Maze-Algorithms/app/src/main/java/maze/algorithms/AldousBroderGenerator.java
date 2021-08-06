@@ -14,23 +14,23 @@ import maze.util.Direction;
 
 public class AldousBroderGenerator {
 
-    private final int STEP_TIME_UNIT = 3;
+    private final int stepTimeUnit = 3;
     private Cell currentCell;
     private Cell previousCell;
-    private int START_CELL;
+    private int startCell;
     private final CellList grid;
     private Random random = new Random();
     private boolean generated = false;
 
     public AldousBroderGenerator(MazeGridPanel gridPanel) {
         this.grid = gridPanel.getGrid();
-        this.START_CELL = random.nextInt(grid.size());
-        this.currentCell = grid.get(START_CELL);
+        this.startCell = random.nextInt(grid.size());
+        this.currentCell = grid.get(startCell);
         createStepTimer(gridPanel).start();
     }
 
     private Timer createStepTimer(MazeGridPanel gridPanel) {
-        Timer stepTimer = new Timer(STEP_TIME_UNIT, null);
+        Timer stepTimer = new Timer(stepTimeUnit, null);
         stepTimer.addActionListener(new ActionListener() {
 
             @Override

@@ -4,9 +4,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import org.junit.Before;
 import org.junit.Test;
 
 public class CellTest {
+
+    private CellList testGrid;
+
+    @Before
+    public void initialize() {
+        testGrid = new CellList();
+    }
 
     @Test
     public void shouldRemoveTopWall() {
@@ -94,7 +102,6 @@ public class CellTest {
 
     @Test
     public void shouldReturnAllNeighbours() {
-        CellList testGrid = new CellList();
         Cell currentCell = new Cell(10, 10);
         Cell topNeighbour = new Cell(10, 9);
         Cell bottomNeighbour = new Cell(10, 11);
@@ -113,7 +120,6 @@ public class CellTest {
     @Test
     public void shouldReturnOnlyVisitedNeighbours() {
 
-        CellList testGrid = new CellList();
         Cell currentCell = new Cell(10, 10);
         Cell topNeighbour = new Cell(10, 9);
         Cell bottomNeighbour = new Cell(10, 11);
@@ -130,4 +136,54 @@ public class CellTest {
 
         assertEquals(1, currentCell.getVisitedNeighbours(testGrid).size());
     }
+
+    @Test
+    public void shouldReturnUnvisitedNeigbours() {
+        Cell currentCell = new Cell(10, 10);
+        Cell topNeighbour = new Cell(10, 9);
+        Cell bottomNeighbour = new Cell(10, 11);
+        Cell leftNeighbour = new Cell(11, 10);
+        Cell rightNeighbour = new Cell(9, 10);
+        Cell farRightNeihbour = new Cell(8, 10);
+
+        leftNeighbour.setVisited(true);
+        rightNeighbour.setVisited(true);
+
+        testGrid.add(currentCell);
+        testGrid.add(topNeighbour);
+        testGrid.add(bottomNeighbour);
+        testGrid.add(leftNeighbour);
+        testGrid.add(rightNeighbour);
+        testGrid.add(farRightNeihbour);
+
+        assertEquals(2, currentCell.getUnvisitedNeighbours(testGrid).size());
+    }
+
+    @Test
+    public void shouldNotReturnNeighbours() {
+        Cell currentCell = new Cell(10, 10);
+        Cell topNeighbour = new Cell(12, 9);
+        Cell bottomNeighbour = new Cell(14, 11);
+        Cell leftNeighbour = new Cell(15, 10);
+        Cell rightNeighbour = new Cell(9, 14);
+
+        testGrid.add(currentCell);
+        testGrid.add(topNeighbour);
+        testGrid.add(bottomNeighbour);
+        testGrid.add(leftNeighbour);
+        testGrid.add(rightNeighbour);
+
+        assertEquals(0, currentCell.getNeighbours(testGrid).size());
+    }
+
+    @Test
+    public void shouldReturnTrueForEqualCells() {
+        Cell cell = new Cell(10, 10);
+        Cell copyCell = cell;
+        Cell equalCell = new Cell(10, 10);
+
+        assertTrue(cell.equals(copyCell));
+        assertTrue(cell.equals(equalCell));
+    }
+
 }

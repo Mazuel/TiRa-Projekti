@@ -1,4 +1,4 @@
-## Viikko 2
+# Viikko 2
 - Loin oman tietorakenteen listalle ja sain ui:n toimimaan tarpeeksi hyvin tässä vaiheessa
 - Sain implementoitua ensimmäisen version binääripuu -algoritmista
 - Lisäsin labyrintin luomisvaiheessa jokaisen vaiheen väliin pienen viiveen, jotta algoritmin toimintaa näkyy paremmin käyttäjälle

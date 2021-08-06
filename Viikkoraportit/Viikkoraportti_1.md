@@ -1,4 +1,4 @@
-## Viikko 1
+# Viikko 1
 
 - Päätin aiheeksi labyrintin-generoinnin
 - Perehdyin javan swing kirjastoon, jonka avulla voin visualisoida eri algoritmeja

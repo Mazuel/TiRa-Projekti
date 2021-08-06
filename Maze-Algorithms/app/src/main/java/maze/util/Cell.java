@@ -18,6 +18,7 @@ public class Cell {
         this.y = y;
     }
 
+    @ExcludeFromJacocoGeneratedReport
     public void draw(Graphics graphics) {
         int xLocation = x * Maze.CELL_SIZE;
         int yLocation = y * Maze.CELL_SIZE;
@@ -32,6 +33,14 @@ public class Cell {
             graphics.setColor(Color.YELLOW);
             graphics.fillRect(xLocation, yLocation, Maze.CELL_SIZE, Maze.CELL_SIZE);
         }
+
+        drawWalls(graphics, xLocation, yLocation);
+
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    private void drawWalls(Graphics graphics, int xLocation, int yLocation) {
+
         // Seinien väri
         graphics.setColor(wallColor);
 
@@ -153,6 +162,7 @@ public class Cell {
         }
     }
 
+    @ExcludeFromJacocoGeneratedReport
     public void colorCell(Graphics graphics, Color color) {
         int locationX = x * Maze.CELL_SIZE;
         int locationY = y * Maze.CELL_SIZE;
@@ -172,50 +182,62 @@ public class Cell {
     }
 
     @Override
+    @ExcludeFromJacocoGeneratedReport
     public String toString() {
         return "(" + x + ", " + y + ")";
     }
 
+    @ExcludeFromJacocoGeneratedReport
     public boolean[] getWalls() {
         return walls;
     }
 
+    @ExcludeFromJacocoGeneratedReport
     public void setWalls(boolean[] walls) {
         this.walls = walls;
     }
 
+    @ExcludeFromJacocoGeneratedReport
     public boolean notVisited() {
         return !visited;
     }
 
+    @ExcludeFromJacocoGeneratedReport
     public boolean isVisited() {
         return visited;
     }
 
+    @ExcludeFromJacocoGeneratedReport
     public void setVisited(boolean visited) {
         this.visited = visited;
     }
 
+    @ExcludeFromJacocoGeneratedReport
     public int getX() {
         return x;
     }
 
+    @ExcludeFromJacocoGeneratedReport
     public void setX(int x) {
         this.x = x;
     }
 
+    @ExcludeFromJacocoGeneratedReport
     public int getY() {
         return y;
     }
 
+    @ExcludeFromJacocoGeneratedReport
     public void setY(int y) {
         this.y = y;
     }
 
+    @ExcludeFromJacocoGeneratedReport
     public boolean isCursor() {
         return cursor;
     }
 
+    @ExcludeFromJacocoGeneratedReport
     public void setCursor(boolean cursor) {
         this.cursor = cursor;
     }

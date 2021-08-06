@@ -21,21 +21,23 @@ public class CellList {
     }
 
     public Cell get(int index) {
-        if (index > size || index < 0) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
-        }
+        checkIndexInBounds(index);
         return cells[index];
     }
 
     public Cell remove(int index) {
-        if (index >= size || index < 0) {
-            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
-        }
+        checkIndexInBounds(index);
         Cell cell = cells[index];
         int newSize = size - (index + 1);
         System.arraycopy(cells, index + 1, cells, index, newSize);
         size--;
         return cell;
+    }
+
+    private void checkIndexInBounds(int index) {
+        if (index >= size || index < 0) {
+            throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
+        }
     }
 
     public int size() {
@@ -46,7 +48,7 @@ public class CellList {
         for (int i = 0; i < size; i++) {
             if (!cells[i].isVisited()) {
                 return false;
-            } 
+            }
         }
         return true;
     }
@@ -82,6 +84,7 @@ public class CellList {
     }
 
     @Override
+    @ExcludeFromJacocoGeneratedReport
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append('[');
