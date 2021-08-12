@@ -6,12 +6,15 @@ package maze.gui;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -26,6 +29,9 @@ public class Maze {
     public static boolean algorithmInAction = false;
 
     private int mazeColumns, mazeRows;
+    private JFrame mainFrame;
+
+    public static boolean generated = false;
 
     public static void main(String[] args) {
         new Maze();
@@ -47,12 +53,12 @@ public class Maze {
                         | UnsupportedLookAndFeelException ex) {
                     ex.printStackTrace();
                 }
-                showGui();
+                createGUI();
             }
         });
     }
 
-    private JFrame createGUI() {
+    private void createGUI() {
         JFrame mainFrame = new JFrame("Labyrintti algoritmeja");
 
         JPanel mainContainer = new JPanel();
@@ -67,16 +73,12 @@ public class Maze {
         mazeBorder.add(mazeGridPanel);
 
         mainContainer.add(mazeBorder);
-        mainContainer.add(algorithmOptions);
         mainContainer.add(createButtonLayout(mazeGridPanel, algorithmOptions));
 
         mainFrame.pack();
         mainFrame.setLocationRelativeTo(null);
-        return mainFrame;
-    }
-
-    private void showGui() {
-        createGUI().setVisible(true);
+        mainFrame.setVisible(true);
+        this.mainFrame = mainFrame;
     }
 
     private JPanel createMazeBorder(int mazeRows, int mazeColumns) {
@@ -105,22 +107,51 @@ public class Maze {
 
     private JPanel createButtonLayout(MazeGridPanel mazeGridPanel, JComboBox<AlgorithmComboItem> algorithmOptions) {
         JButton runButton = new JButton("Suorita");
-        CardLayout buttonLayout = new CardLayout(30, 30);
-        JPanel buttons = new JPanel(buttonLayout);
+        JButton resetButton = new JButton("Resetoi näkymä");
+        CardLayout cardLayout = new CardLayout(15, 15);
+        JPanel buttonCards = new JPanel(cardLayout);
 
-        buttons.setOpaque(false);
-        buttons.add(runButton, "Suorita");
+        JPanel runButtonCard = new JPanel();
+        JPanel resetButtonCard = new JPanel();
+        runButtonCard.setLayout(new GridBagLayout());
+        resetButtonCard.setLayout(new GridBagLayout());
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.fill = GridBagConstraints.BOTH;
+        constraints.gridwidth = 12;
+        constraints.ipadx = 500;
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+
+        runButtonCard.add(algorithmOptions, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+
+        runButtonCard.add(runButton, constraints);
+        resetButtonCard.add(resetButton, constraints);
+
+        buttonCards.setBorder(BorderFactory.createEmptyBorder(0, CELL_SIZE, CELL_SIZE, CELL_SIZE));
+
+        buttonCards.setOpaque(false);
+        buttonCards.add(runButtonCard, "Suorita");
+        buttonCards.add(resetButtonCard, "Resetoi näkymä");
 
         runButton.addActionListener(event -> {
-            if (!algorithmInAction) {
-                algorithmInAction = true;
-                AlgorithmComboItem item = (AlgorithmComboItem) algorithmOptions.getSelectedItem();
-                mazeGridPanel.generate(item.getAlgorithm());
+            generated = false;
+            AlgorithmComboItem item = (AlgorithmComboItem) algorithmOptions.getSelectedItem();
+            mazeGridPanel.generate(item.getAlgorithm());
+            cardLayout.next(buttonCards);
+        });
+
+        resetButton.addActionListener(event -> {
+            if (generated) {
+                createGUI();
             } else {
-                System.out.println("Algoritmia suoritetaan jo!");
+                JOptionPane.showMessageDialog(mainFrame, "Odota, että labyrintti on generoitu loppuun");
             }
         });
 
-        return buttons;
+        return buttonCards;
     }
 }

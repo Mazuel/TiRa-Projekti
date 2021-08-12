@@ -39,7 +39,7 @@ public class PrimsGenerator {
         timer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!generated) {
+                if (!Maze.generated) {
                     generate();
                 } else {
                     timer.stop();
@@ -83,7 +83,7 @@ public class PrimsGenerator {
         currentCell.removeWall(randomVisitedNeighbour);
 
         if (frontierCells.isEmpty()) {
-            generated = true;
+            Maze.generated = true;
         }
 
     }

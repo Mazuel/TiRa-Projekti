@@ -35,9 +35,9 @@ public class AldousBroderGenerator {
 
             @Override
             public void actionPerformed(ActionEvent arg0) {
-                if (!generated) {
+                if (!Maze.generated) {
                     generate();
-                    generated = grid.isAllVisited();
+                    Maze.generated = grid.isAllVisited();
                 } else {
                     currentCell.setCursor(false);
                     Maze.algorithmInAction = false;

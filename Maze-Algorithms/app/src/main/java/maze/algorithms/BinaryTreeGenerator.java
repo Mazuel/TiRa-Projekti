@@ -21,7 +21,6 @@ public class BinaryTreeGenerator {
     private Cell currentCell;
     private Cell previousCell;
     private Random randomDirection = new Random();
-    private boolean generated = false;
 
     public BinaryTreeGenerator(MazeGridPanel mazeGridPanel) {
         this.grid = mazeGridPanel.getGrid();
@@ -34,9 +33,9 @@ public class BinaryTreeGenerator {
         timer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!generated) {
+                if (!Maze.generated) {
                     generate();
-                    generated = grid.isAllVisited();
+                    Maze.generated = grid.isAllVisited();
                 } else {
                     timer.stop();
                     Maze.algorithmInAction = false;
@@ -49,7 +48,6 @@ public class BinaryTreeGenerator {
 
     // Algoritmi
     private void generate() {
-
         if (previousCell != null) {
             previousCell.setCursor(false);
         }
