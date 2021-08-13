@@ -12,6 +12,7 @@ public class Cell {
     private boolean[] walls = { true, true, true, true };
     private final Color wallColor = Color.BLACK;
     private boolean cursor = false;
+    private boolean recursiveVisit = false;
 
     public Cell(int x, int y) {
         this.x = x;
@@ -34,6 +35,10 @@ public class Cell {
             graphics.fillRect(xLocation, yLocation, Maze.CELL_SIZE, Maze.CELL_SIZE);
         }
 
+        if (recursiveVisit) {
+            graphics.setColor(Color.PINK);
+            graphics.fillRect(xLocation, yLocation, Maze.CELL_SIZE, Maze.CELL_SIZE);
+        }
         drawWalls(graphics, xLocation, yLocation);
 
     }
@@ -240,6 +245,16 @@ public class Cell {
     @ExcludeFromJacocoGeneratedReport
     public void setCursor(boolean cursor) {
         this.cursor = cursor;
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    public boolean isRecursiveVisit() {
+        return recursiveVisit;
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    public void setRecursiveVisit(boolean recursiveVisit) {
+        this.recursiveVisit = recursiveVisit;
     }
 
 }

@@ -102,6 +102,8 @@ public class Maze {
         algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.BINARY_TREE, "Binääri puu"));
         algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.ALDOUS_BRODER, "Aldous-Broder"));
         algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.PRIMS, "Primin algoritmi"));
+        algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.RECURSIVE_BACKTRACKER,
+                "Rekursiivinen algoritmi (Recursive Backtracker)"));
         return algorithmOptions;
     }
 

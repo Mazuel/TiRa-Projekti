@@ -18,7 +18,6 @@ public class PrimsGenerator {
     private final CellList grid;
     private int index;
     private Random randomCellPicker = new Random();
-    private boolean generated = false;
     private Cell currentCell;
 
     private HashSet<Cell> frontierCells;

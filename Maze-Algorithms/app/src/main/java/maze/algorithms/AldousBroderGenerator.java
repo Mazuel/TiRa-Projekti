@@ -20,7 +20,6 @@ public class AldousBroderGenerator {
     private int startCell;
     private final CellList grid;
     private Random random = new Random();
-    private boolean generated = false;
 
     public AldousBroderGenerator(MazeGridPanel gridPanel) {
         this.grid = gridPanel.getGrid();
