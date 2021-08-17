@@ -3,7 +3,7 @@
 ## Testaaminen
 Algoritmien toteuttamiseen liittyvät tietorakenteen ja luokat ovat testattu yksikkötesteillä.
 
-Itse algoritmien testaaminen on toteutettu empiirisesti suorittamalla algoritmejä useita kertoja ja toteamalla, että ne luovat validin labyrintin
+Itse algoritmien testaaminen on toteutettu vielä tässä vaiheessa empiirisesti suorittamalla niitä useita kertoja ja toteamalla, että ne luovat validin labyrintin
 
 
 ## Koodikattavuus
