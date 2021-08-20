@@ -19,6 +19,7 @@ public class Cell {
         this.y = y;
     }
 
+    // Käyttöliittymäkoodia
     @ExcludeFromJacocoGeneratedReport
     public void draw(Graphics graphics) {
         int xLocation = x * Maze.CELL_SIZE;
@@ -43,6 +44,7 @@ public class Cell {
 
     }
 
+    // Käyttöliittymäkoodia
     @ExcludeFromJacocoGeneratedReport
     private void drawWalls(Graphics graphics, int xLocation, int yLocation) {
 

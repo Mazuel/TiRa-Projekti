@@ -29,7 +29,7 @@ dependencies {
 
 application {
     // Define the main class for the application.
-    mainClass = 'Maze.Algorithms.App'
+    mainClass = 'maze.gui.Maze'
 }
 
 jacocoTestReport {
@@ -45,6 +45,20 @@ jacocoTestReport {
             ])
         }))
     }
+}
+
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'maze.gui.Maze'
+        )
+    }
+    baseName 'mazealgorithms'
+}
+
+tasks.withType(JavaCompile) {
+  options.encoding = "utf-8" 
 }
 
 check.dependsOn jacocoTestReport
