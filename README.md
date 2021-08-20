@@ -6,6 +6,7 @@
 - [Viikko 2](Viikkoraportit/Viikkoraportti_2.md)
 - [Viikko 3](Viikkoraportit/Viikkoraportti_3.md)
 - [Viikko 4](Viikkoraportit/Viikkoraportti_4.md)
+- [Viikko 5](Viikkoraportit/Viikkoraportti_5.md)
 
 ## Dokumentit
 
