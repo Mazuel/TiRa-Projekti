@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -14,8 +16,11 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import maze.util.GeneratorAlgorithm;
 
 public class Maze {
 
@@ -24,7 +29,7 @@ public class Maze {
                                             // labyrintin käsittelyä
     public static final int CELL_SIZE = WIDTH / 32;
     public static final int START_CELL = 0;
-    public static boolean algorithmInAction = false;
+    public int renderSpeed = 5; // millisekuntia
 
     private int mazeColumns, mazeRows;
     private JFrame mainFrame;
@@ -140,7 +145,8 @@ public class Maze {
         runButton.addActionListener(event -> {
             generated = false;
             AlgorithmComboItem item = (AlgorithmComboItem) algorithmOptions.getSelectedItem();
-            mazeGridPanel.generate(item.getAlgorithm());
+            GeneratorAlgorithm algorithm = mazeGridPanel.createAlgorithm(item.getAlgorithm());
+            createAndStartTimer(algorithm, mazeGridPanel);
             cardLayout.next(buttonCards);
         });
 
@@ -153,5 +159,21 @@ public class Maze {
         });
 
         return buttonCards;
+    }
+
+    public void createAndStartTimer(GeneratorAlgorithm algorithm, MazeGridPanel mazeGridPanel) {
+        Timer timer = new Timer(renderSpeed, null);
+        timer.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!generated) {
+                    algorithm.generate();
+                } else {
+                    timer.stop();
+                }
+                mazeGridPanel.repaint();
+            }
+        });
+        timer.start();
     }
 }

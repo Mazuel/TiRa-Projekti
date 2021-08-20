@@ -1,20 +1,16 @@
 package maze.algorithms;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Random;
-
-import javax.swing.Timer;
 
 import maze.gui.Maze;
 import maze.gui.MazeGridPanel;
 import maze.util.Cell;
 import maze.util.CellList;
 import maze.util.Direction;
+import maze.util.GeneratorAlgorithm;
 
-public class BinaryTreeGenerator {
+public class BinaryTreeGenerator implements GeneratorAlgorithm {
 
-    private int renderSpeed = 5; // Millisekuntia
     private int index;
 
     private final CellList grid;
@@ -26,30 +22,6 @@ public class BinaryTreeGenerator {
         this.grid = mazeGridPanel.getGrid();
         this.index = grid.size() - 1;
         this.currentCell = grid.get(index);
-
-        // Asetetaan pieni viive jokaisen askeleen väliin, jotta voidaan hahmottaa
-        // algoritmin toimintaa helpommin
-        Timer timer = new Timer(renderSpeed, null);
-        timer.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (!Maze.generated) {
-                    generate();
-                    Maze.generated = grid.isAllVisited();
-                } else {
-                    timer.stop();
-                    Maze.algorithmInAction = false;
-                }
-                mazeGridPanel.repaint();
-            }
-        });
-        timer.start();
-    }
-
-    public void generateMazeForTesting() {
-        while (!Maze.generated) {
-            generate();
-        }
     }
 
     // Algoritmi
@@ -61,7 +33,8 @@ public class BinaryTreeGenerator {
     // 4. Valitaan nykyiseksi soluksi järjestyksessä edellinen solu, koska
     // aloitettiin taulukon viimeisestä solusta
     // 5. Toistetaan kohtia 2-4, kunnes jokaisessa solussa on vieraltu kerran
-    private void generate() {
+    @Override
+    public void generate() {
         if (previousCell != null) {
             previousCell.setCursor(false);
         }
@@ -88,6 +61,7 @@ public class BinaryTreeGenerator {
             previousCell = currentCell;
             currentCell = grid.get(--index);
         } else {
+            Maze.generated = true;
             currentCell.setCursor(false);
         }
     }

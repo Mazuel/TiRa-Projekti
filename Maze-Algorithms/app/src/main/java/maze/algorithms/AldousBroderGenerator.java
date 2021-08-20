@@ -1,20 +1,16 @@
 package maze.algorithms;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Random;
-
-import javax.swing.Timer;
 
 import maze.gui.Maze;
 import maze.gui.MazeGridPanel;
 import maze.util.Cell;
 import maze.util.CellList;
 import maze.util.Direction;
+import maze.util.GeneratorAlgorithm;
 
-public class AldousBroderGenerator {
+public class AldousBroderGenerator implements GeneratorAlgorithm {
 
-    private final int stepTimeUnit = 3;
     private Cell currentCell;
     private Cell previousCell;
     private int startCell;
@@ -25,31 +21,11 @@ public class AldousBroderGenerator {
         this.grid = gridPanel.getGrid();
         this.startCell = random.nextInt(grid.size());
         this.currentCell = grid.get(startCell);
-        createStepTimer(gridPanel).start();
-    }
-
-    private Timer createStepTimer(MazeGridPanel gridPanel) {
-        Timer stepTimer = new Timer(stepTimeUnit, null);
-        stepTimer.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                if (!Maze.generated) {
-                    generate();
-                    Maze.generated = grid.isAllVisited();
-                } else {
-                    currentCell.setCursor(false);
-                    Maze.algorithmInAction = false;
-                    stepTimer.stop();
-                }
-                gridPanel.repaint();
-            }
-        });
-        return stepTimer;
     }
 
     // Algoritmi
-    private void generate() {
+    @Override
+    public void generate() {
 
         if (previousCell != null) {
             previousCell.setCursor(false);
@@ -84,6 +60,10 @@ public class AldousBroderGenerator {
 
         previousCell = currentCell;
         currentCell = nextCell;
-        // currentCell.setCursor(false);
+
+        Maze.generated = grid.isAllVisited();
+        if (Maze.generated) {
+            currentCell.setCursor(false);
+        }
     }
 }

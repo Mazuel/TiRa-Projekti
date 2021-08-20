@@ -17,6 +17,7 @@ import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
 import maze.algorithms.BinaryTreeGenerator;
+import maze.gui.Maze;
 import maze.gui.MazeGridPanel;
 
 public class BinaryTreeGeneratorTest {
@@ -41,7 +42,9 @@ public class BinaryTreeGeneratorTest {
     public void shouldHaveVisitedAllCells() {
         BinaryTreeGenerator generator = new BinaryTreeGenerator(mazeGridPanel);
         assertFalse(mazeGridPanel.getGrid().isAllVisited());
-        generator.generateMazeForTesting();
+        while (!Maze.generated) {
+            generator.generate();
+        }
         assertTrue(mazeGridPanel.getGrid().isAllVisited());
     }
 

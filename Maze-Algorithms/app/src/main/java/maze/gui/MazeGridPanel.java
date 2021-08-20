@@ -10,6 +10,7 @@ import maze.algorithms.PrimsGenerator;
 import maze.algorithms.RecursiveBacktrackerGenerator;
 import maze.util.Cell;
 import maze.util.CellList;
+import maze.util.GeneratorAlgorithm;
 
 public class MazeGridPanel extends JPanel {
 
@@ -37,22 +38,18 @@ public class MazeGridPanel extends JPanel {
         }
     }
 
-    public void generate(AlgorithmOption algorithm) {
-        System.out.println(algorithm);
+    public GeneratorAlgorithm createAlgorithm(AlgorithmOption algorithm) {
         switch (algorithm) {
             case BINARY_TREE:
-                new BinaryTreeGenerator(this);
-                break;
+                return new BinaryTreeGenerator(this);
             case ALDOUS_BRODER:
-                new AldousBroderGenerator(this);
-                break;
+                return new AldousBroderGenerator(this);
             case PRIMS:
-                new PrimsGenerator(this);
-                break;
+                return new PrimsGenerator(this);
             case RECURSIVE_BACKTRACKER:
-                new RecursiveBacktrackerGenerator(this);
-                break;
+                return new RecursiveBacktrackerGenerator(this);
             default:
+                return null;
         }
     }
 
