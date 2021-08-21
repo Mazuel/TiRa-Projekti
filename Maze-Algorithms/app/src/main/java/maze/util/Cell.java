@@ -10,67 +10,12 @@ public class Cell {
 
     private boolean visited = false;
     private boolean[] walls = { true, true, true, true };
-    private final Color wallColor = Color.BLACK;
     private boolean cursor = false;
-    private boolean deadEnd = false;
+    private boolean recursiveVisit = false;
 
     public Cell(int x, int y) {
         this.x = x;
         this.y = y;
-    }
-
-    // Käyttöliittymäkoodia
-    @ExcludeFromJacocoGeneratedReport
-    public void draw(Graphics graphics) {
-        int xLocation = x * Maze.CELL_SIZE;
-        int yLocation = y * Maze.CELL_SIZE;
-
-        graphics.setColor(Color.DARK_GRAY);
-        graphics.fillRect(xLocation, yLocation, Maze.CELL_SIZE, Maze.CELL_SIZE);
-
-        if (cursor) {
-            graphics.setColor(Color.RED);
-            graphics.fillRect(xLocation, yLocation, Maze.CELL_SIZE, Maze.CELL_SIZE);
-        } else if (visited) {
-            graphics.setColor(Color.YELLOW);
-            graphics.fillRect(xLocation, yLocation, Maze.CELL_SIZE, Maze.CELL_SIZE);
-        }
-
-        if (deadEnd) {
-            graphics.setColor(Color.PINK);
-            graphics.fillRect(xLocation, yLocation, Maze.CELL_SIZE, Maze.CELL_SIZE);
-        }
-        drawWalls(graphics, xLocation, yLocation);
-
-    }
-
-    // Käyttöliittymäkoodia
-    @ExcludeFromJacocoGeneratedReport
-    private void drawWalls(Graphics graphics, int xLocation, int yLocation) {
-
-        // Seinien väri
-        graphics.setColor(wallColor);
-
-        // Ylä
-        if (walls[0]) {
-            graphics.drawLine(xLocation, yLocation, xLocation + Maze.CELL_SIZE, yLocation);
-        }
-
-        // Oikea
-        if (walls[1]) {
-            graphics.drawLine(xLocation + Maze.CELL_SIZE, yLocation, xLocation + Maze.CELL_SIZE,
-                    yLocation + Maze.CELL_SIZE);
-        }
-
-        // Ala
-        if (walls[2]) {
-            graphics.drawLine(xLocation + Maze.CELL_SIZE, yLocation + Maze.CELL_SIZE, xLocation,
-                    yLocation + Maze.CELL_SIZE);
-        }
-        // Vasen
-        if (walls[3]) {
-            graphics.drawLine(xLocation, yLocation + Maze.CELL_SIZE, xLocation, yLocation);
-        }
     }
 
     private Cell getNeighbourIfExists(CellList cells, Cell neighbour) {
@@ -169,13 +114,13 @@ public class Cell {
         }
     }
 
-    @ExcludeFromJacocoGeneratedReport
-    public void colorCell(Graphics graphics, Color color) {
-        int locationX = x * Maze.CELL_SIZE;
-        int locationY = y * Maze.CELL_SIZE;
-        graphics.setColor(color);
-        graphics.fillRect(locationX, locationY, Maze.CELL_SIZE, Maze.CELL_SIZE);
-    }
+    // @ExcludeFromJacocoGeneratedReport
+    // public void colorCell(Graphics graphics, Color color) {
+    // int locationX = x * Maze.CELL_SIZE;
+    // int locationY = y * Maze.CELL_SIZE;
+    // graphics.setColor(color);
+    // graphics.fillRect(locationX, locationY, Maze.CELL_SIZE, Maze.CELL_SIZE);
+    // }
 
     @Override
     public boolean equals(Object o) {
@@ -251,12 +196,12 @@ public class Cell {
 
     @ExcludeFromJacocoGeneratedReport
     public boolean isRecursiveVisit() {
-        return deadEnd;
+        return recursiveVisit;
     }
 
     @ExcludeFromJacocoGeneratedReport
     public void setRecursiveVisit(boolean deadEnd) {
-        this.deadEnd = deadEnd;
+        this.recursiveVisit = deadEnd;
     }
 
 }

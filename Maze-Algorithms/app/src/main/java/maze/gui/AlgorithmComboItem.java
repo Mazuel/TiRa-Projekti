@@ -1,9 +1,9 @@
 package maze.gui;
 
 public class AlgorithmComboItem {
-    AlgorithmOption algorithm;
-    String label;
-    
+    private AlgorithmOption algorithm;
+    private String label;
+
     public AlgorithmComboItem(AlgorithmOption algorithm, String label) {
         this.algorithm = algorithm;
         this.label = label;
@@ -12,12 +12,15 @@ public class AlgorithmComboItem {
     public AlgorithmOption getAlgorithm() {
         return algorithm;
     }
+
     public void setAlgorithm(AlgorithmOption algorithm) {
         this.algorithm = algorithm;
     }
+
     public String getLabel() {
         return label;
     }
+
     public void setLabel(String label) {
         this.label = label;
     }
@@ -26,5 +29,5 @@ public class AlgorithmComboItem {
     public String toString() {
         return label;
     }
-    
+
 }
