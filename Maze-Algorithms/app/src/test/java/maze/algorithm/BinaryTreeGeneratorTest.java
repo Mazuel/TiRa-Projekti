@@ -16,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
+import maze.algorithms.BfsSolver;
 import maze.algorithms.BinaryTreeGenerator;
 import maze.gui.Maze;
 import maze.gui.MazeGridPanel;
@@ -30,20 +31,37 @@ public class BinaryTreeGeneratorTest {
     private Timer timer;
 
     private MazeGridPanel mazeGridPanel;
+    private BinaryTreeGenerator generator;
 
     @Before
     public void setUp() throws Exception {
         mazeGridPanel = spy(new MazeGridPanel(32, 32));
+        generator = new BinaryTreeGenerator(mazeGridPanel);
         doNothing().when(mazeGridPanel).repaint();
         doNothing().when(timer).start();
+        Maze.generated = false;
+    }
+
+    private void generateMaze() {
+        while (!Maze.generated) {
+            generator.generate();
+        }
     }
 
     @Test
-    public void shouldHaveVisitedAllCells() {
-        BinaryTreeGenerator generator = new BinaryTreeGenerator(mazeGridPanel);
+    public void shouldGenerateMazeAndHaveVisitedAllCells() {
         assertFalse(mazeGridPanel.getGrid().isAllVisited());
-        while (!Maze.generated) {
-            generator.generate();
+        generateMaze();
+        assertTrue(Maze.generated);
+        assertTrue(mazeGridPanel.getGrid().isAllVisited());
+    }
+
+    @Test
+    public void shouldHaveGeneratedValidMaze() {
+        generateMaze();
+        BfsSolver solver = new BfsSolver(mazeGridPanel);
+        while (!Maze.solved) {
+            solver.solve();
         }
         assertTrue(mazeGridPanel.getGrid().isAllVisited());
     }

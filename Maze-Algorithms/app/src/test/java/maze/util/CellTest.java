@@ -186,4 +186,31 @@ public class CellTest {
         assertTrue(cell.equals(equalCell));
     }
 
+    @Test
+    public void shouldOnlyReturnValidUnvisitedNeighbours() {
+        Cell currentCell = new Cell(10, 10);
+        Cell topNeighbour = new Cell(10, 9);
+        Cell bottomNeighbour = new Cell(10, 11);
+        Cell leftNeighbour = new Cell(11, 10);
+        Cell rightNeighbour = new Cell(9, 10);
+        Cell farRightNeihbour = new Cell(8, 10);
+
+        currentCell.setWalls(new boolean[] { true, false, true, false });
+        leftNeighbour.setWalls(new boolean[] { true, false, true, true });
+        rightNeighbour.setWalls(new boolean[] { true, true, true, false });
+        bottomNeighbour.setWalls(new boolean[] { true, false, true, false });
+        topNeighbour.setWalls(new boolean[] { true, false, true, false });
+
+        rightNeighbour.setVisited(true);
+
+        testGrid.add(currentCell);
+        testGrid.add(topNeighbour);
+        testGrid.add(bottomNeighbour);
+        testGrid.add(leftNeighbour);
+        testGrid.add(rightNeighbour);
+        testGrid.add(farRightNeihbour);
+
+        assertEquals(1, currentCell.getUnvisitedValidMoveNeighbours(testGrid).size());
+    }
+
 }

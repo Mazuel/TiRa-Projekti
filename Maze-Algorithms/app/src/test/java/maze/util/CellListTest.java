@@ -103,4 +103,15 @@ public class CellListTest {
         assertTrue(cellList.isAllVisited());
     }
 
+    @Test
+    public void shouldSetAllCellsUnvisited() {
+        for (int i = 0; i < cellList.size(); i++) {
+            cellList.get(i).setVisited(true);
+        }
+
+        assertTrue(cellList.isAllVisited());
+        cellList.setAllUnvisited();
+        assertFalse(cellList.isAllVisited());
+    }
+
 }

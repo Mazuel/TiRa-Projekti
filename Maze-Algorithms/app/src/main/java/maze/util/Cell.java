@@ -1,10 +1,5 @@
 package maze.util;
 
-import java.awt.Color;
-import java.awt.Graphics;
-
-import maze.gui.Maze;
-
 public class Cell {
     private int x, y;
 
@@ -86,6 +81,19 @@ public class Cell {
         return unvisitedNeighbours;
     }
 
+    public CellList getUnvisitedValidMoveNeighbours(CellList cells) {
+        CellList neighbours = getUnvisitedNeighbours(cells);
+        CellList validNeighbours = new CellList();
+
+        for (int i = 0; i < neighbours.size(); i++) {
+            Cell neighbour = neighbours.get(i);
+            if (isPath(neighbour)) {
+                validNeighbours.add(neighbour);
+            }
+        }
+        return validNeighbours;
+    }
+
     public CellList getVisitedNeighbours(CellList cells) {
         CellList neighbours = getNeighbours(cells);
         CellList visitedNeighbours = new CellList();
@@ -97,6 +105,27 @@ public class Cell {
             }
         }
         return visitedNeighbours;
+    }
+
+    public boolean isPath(Cell neighbour) {
+        int x = this.x - neighbour.getX();
+        int y = this.y - neighbour.getY();
+
+        if (x == 1) {
+            // Vasen seinä
+            return !(walls[3] && neighbour.walls[1]);
+        } else if (x == -1) {
+            // Oikea seinä
+            return !(walls[1] && neighbour.walls[3]);
+        }
+
+        if (y == 1) {
+            // Ylä seinä
+            return !(walls[0] && neighbour.walls[2]);
+        } else {
+            // Ala seinä
+            return !(walls[2] && neighbour.walls[0]);
+        }
     }
 
     public Cell getNeighbour(CellList cells, Direction direction) {
@@ -113,14 +142,6 @@ public class Cell {
                 return null;
         }
     }
-
-    // @ExcludeFromJacocoGeneratedReport
-    // public void colorCell(Graphics graphics, Color color) {
-    // int locationX = x * Maze.CELL_SIZE;
-    // int locationY = y * Maze.CELL_SIZE;
-    // graphics.setColor(color);
-    // graphics.fillRect(locationX, locationY, Maze.CELL_SIZE, Maze.CELL_SIZE);
-    // }
 
     @Override
     public boolean equals(Object o) {

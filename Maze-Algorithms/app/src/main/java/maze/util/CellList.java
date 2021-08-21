@@ -44,6 +44,13 @@ public class CellList {
         return size;
     }
 
+    public void setAllUnvisited() {
+        for (int i = 0; i < size; i++) {
+            cells[i].setVisited(false);
+            cells[i].setRecursiveVisit(false);
+        }
+    }
+
     public boolean isAllVisited() {
         for (int i = 0; i < size; i++) {
             if (!cells[i].isVisited()) {
@@ -97,4 +104,5 @@ public class CellList {
         sb.append(']');
         return sb.toString();
     }
+
 }

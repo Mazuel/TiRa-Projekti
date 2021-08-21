@@ -30,7 +30,6 @@ public class MazeGridPanel extends JPanel {
 
     @Override
     public Dimension getPreferredSize() {
-        // +1 jotta solujen 'seinät' näkyvät myös oikealla ja alhaalla
         return new Dimension(Maze.WIDTH + 1, Maze.HEIGHT + 1);
     }
 

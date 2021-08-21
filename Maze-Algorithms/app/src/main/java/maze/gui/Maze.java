@@ -1,6 +1,7 @@
 
 package maze.gui;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -20,6 +21,7 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
+import maze.algorithms.BfsSolver;
 import maze.util.GeneratorAlgorithm;
 
 public class Maze {
@@ -27,14 +29,16 @@ public class Maze {
     public static final int WIDTH = 800;
     public static final int HEIGHT = WIDTH; // Sama kuin leveys, jotta voidaan pitää näkymä symmetrisenä. Helpottaa
                                             // labyrintin käsittelyä
-    public static final int CELL_SIZE = WIDTH / 32;
+    public static final int CELL_SIZE = WIDTH / 80;
     public static final int START_CELL = 0;
-    public int renderSpeed = 5; // millisekuntia
+    public int renderSpeed = 3; // millisekuntia
 
     private int mazeColumns, mazeRows;
     private JFrame mainFrame;
 
     public static boolean generated = false;
+    public static boolean solved = false;
+    private boolean solvingInAction = false;
 
     public static void main(String[] args) {
         new Maze();
@@ -66,7 +70,7 @@ public class Maze {
 
         JPanel mainContainer = new JPanel();
         mainContainer.setLayout(new BoxLayout(mainContainer, BoxLayout.Y_AXIS));
-        mainFrame.setContentPane(mainContainer);
+        mainFrame.add(mainContainer, BorderLayout.CENTER);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mazeBorder = createMazeBorder(mazeRows, mazeColumns);
@@ -113,6 +117,8 @@ public class Maze {
     private JPanel createButtonLayout(MazeGridPanel mazeGridPanel, JComboBox<AlgorithmComboItem> algorithmOptions) {
         JButton runButton = new JButton("Suorita");
         JButton resetButton = new JButton("Resetoi näkymä");
+        JButton solveMaze = new JButton("Ratkaise labyrintti");
+
         CardLayout cardLayout = new CardLayout(15, 15);
         JPanel buttonCards = new JPanel(cardLayout);
 
@@ -129,6 +135,7 @@ public class Maze {
         constraints.gridy = 0;
 
         runButtonCard.add(algorithmOptions, constraints);
+        resetButtonCard.add(solveMaze, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 1;
@@ -151,10 +158,34 @@ public class Maze {
         });
 
         resetButton.addActionListener(event -> {
-            if (generated) {
+            if (generated && !solvingInAction) {
                 createGUI();
             } else {
-                JOptionPane.showMessageDialog(mainFrame, "Odota, että labyrintti on generoitu loppuun");
+                JOptionPane.showMessageDialog(mainFrame, "Odota, että algoritmi on suorittanut loppuun");
+            }
+        });
+
+        solveMaze.addActionListener(event -> {
+            if (!solvingInAction) {
+                BfsSolver bfsSolver = new BfsSolver(mazeGridPanel);
+                solvingInAction = true;
+                final Timer timer = new Timer(renderSpeed, null);
+                timer.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (!solved) {
+                            bfsSolver.solve();
+                        } else {
+                            solvingInAction = false;
+                            solved = false;
+                            timer.stop();
+                        }
+                        mazeGridPanel.repaint();
+                    }
+                });
+                timer.start();
+            } else {
+                JOptionPane.showMessageDialog(mainFrame, "Algoritmi on jo käynnissä!");
             }
         });
 
@@ -169,6 +200,7 @@ public class Maze {
                 if (!generated) {
                     algorithm.generate();
                 } else {
+                    mazeGridPanel.getGrid().setAllUnvisited();
                     timer.stop();
                 }
                 mazeGridPanel.repaint();
