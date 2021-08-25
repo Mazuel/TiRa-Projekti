@@ -1,15 +1,15 @@
 package maze.gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Color;
 
 import javax.swing.JPanel;
 
-import maze.algorithms.AldousBroderGenerator;
-import maze.algorithms.BinaryTreeGenerator;
-import maze.algorithms.PrimsGenerator;
-import maze.algorithms.RecursiveBacktrackerGenerator;
+import maze.algorithms.generators.AldousBroderGenerator;
+import maze.algorithms.generators.BinaryTreeGenerator;
+import maze.algorithms.generators.PrimsGenerator;
+import maze.algorithms.generators.RecursiveBacktrackerGenerator;
 import maze.util.Cell;
 import maze.util.CellList;
 import maze.util.ExcludeFromJacocoGeneratedReport;

@@ -1,4 +1,4 @@
-package maze.algorithms;
+package maze.algorithms.generators;
 
 import java.util.Random;
 

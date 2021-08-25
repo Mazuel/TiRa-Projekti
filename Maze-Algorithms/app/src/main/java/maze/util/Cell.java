@@ -113,18 +113,20 @@ public class Cell {
 
         if (x == 1) {
             // Vasen seinä
-            return !(walls[3] && neighbour.walls[1]);
+            return !(walls[3] || neighbour.walls[1]);
         } else if (x == -1) {
             // Oikea seinä
-            return !(walls[1] && neighbour.walls[3]);
+            return !(walls[1] || neighbour.walls[3]);
         }
 
         if (y == 1) {
             // Ylä seinä
-            return !(walls[0] && neighbour.walls[2]);
-        } else {
+            return !(walls[0] || neighbour.walls[2]);
+        } else if (y == -1) {
             // Ala seinä
-            return !(walls[2] && neighbour.walls[0]);
+            return !(walls[2] || neighbour.walls[0]);
+        } else {
+            return false;
         }
     }
 

@@ -1,4 +1,4 @@
-package maze.algorithms;
+package maze.algorithms.solvers;
 
 import maze.gui.Maze;
 import maze.gui.MazeGridPanel;
@@ -29,7 +29,7 @@ public class BfsSolver {
             cellQueue.push(neighbour);
         }
 
-        if (grid.isAllVisited()) {
+        if (cellQueue.isEmpty()) {
             Maze.solved = true;
         }
     }

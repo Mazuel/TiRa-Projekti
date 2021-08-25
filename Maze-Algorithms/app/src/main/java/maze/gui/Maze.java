@@ -21,17 +21,16 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
-import maze.algorithms.BfsSolver;
+import maze.algorithms.solvers.BfsSolver;
 import maze.util.GeneratorAlgorithm;
 
 public class Maze {
 
     public static final int WIDTH = 800;
-    public static final int HEIGHT = WIDTH; // Sama kuin leveys, jotta voidaan pitää näkymä symmetrisenä. Helpottaa
-                                            // labyrintin käsittelyä
+    public static final int HEIGHT = WIDTH; // Sama kuin leveys, jotta voidaan pitää näkymä symmetrisenä.
     public static final int CELL_SIZE = WIDTH / 80;
     public static final int START_CELL = 0;
-    public int renderSpeed = 3; // millisekuntia
+    public int renderSpeed = 0; // viive algoritmien 'askelien' välissä millisekunteina
 
     private int mazeColumns, mazeRows;
     private JFrame mainFrame;
@@ -109,15 +108,14 @@ public class Maze {
         algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.BINARY_TREE, "Binääri puu"));
         algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.ALDOUS_BRODER, "Aldous-Broder"));
         algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.PRIMS, "Primin algoritmi"));
-        algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.RECURSIVE_BACKTRACKER,
-                "Rekursiivinen algoritmi (Recursive Backtracker)"));
+        algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.RECURSIVE_BACKTRACKER, "Recursive Backtracker"));
         return algorithmOptions;
     }
 
     private JPanel createButtonLayout(MazeGridPanel mazeGridPanel, JComboBox<AlgorithmComboItem> algorithmOptions) {
         JButton runButton = new JButton("Suorita");
-        JButton resetButton = new JButton("Resetoi näkymä");
-        JButton solveMaze = new JButton("Ratkaise labyrintti");
+        JButton resetButton = new JButton("Resetoi näkymä"); 
+        JButton solveMaze = new JButton("Validoi labyrintti");
 
         CardLayout cardLayout = new CardLayout(15, 15);
         JPanel buttonCards = new JPanel(cardLayout);
