@@ -50,12 +50,9 @@ public class PrimsGenerator implements GeneratorAlgorithm {
 
         Cell randomVisitedNeighbour = null;
         while (randomVisitedNeighbour == null) {
-            int randomIndex = randomCellPicker.nextInt(visitedNeighbours.size());
             Cell randomCell = visitedNeighbours.get(randomCellPicker.nextInt(visitedNeighbours.size()));
             if (visitedCells.contains(randomCell)) {
                 randomVisitedNeighbour = randomCell;
-            } else {
-                visitedNeighbours.remove(randomIndex);
             }
         }
 

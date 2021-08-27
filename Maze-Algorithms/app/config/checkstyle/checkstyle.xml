@@ -27,7 +27,6 @@
 
 		<!-- Miscellaneous -->
 
-		<module name='Indentation' />
 		<module name="OneStatementPerLine" />
 
 		<!--- Naming Conventions -->
@@ -45,7 +44,6 @@
 		</module>
 
 		<module name='ParameterName' />
-		<module name='StaticVariableName' />
 		<module name='TypeName' />
 
 		<!-- Whitespace -->

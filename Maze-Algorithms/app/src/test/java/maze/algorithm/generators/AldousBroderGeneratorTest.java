@@ -16,12 +16,13 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import maze.algorithms.generators.RecursiveBacktrackerGenerator;
+import maze.algorithms.generators.AldousBroderGenerator;
 import maze.algorithms.solvers.BfsSolver;
 import maze.gui.Maze;
 import maze.gui.MazeGridPanel;
 
-public class RecursiveBacktrackerGeneratorTest {
+// Tämä luokka saattaa hidastaa testien ajamista huomattavasti, koska algoritmin suoritusaika on hyvin satunnainen
+public class AldousBroderGeneratorTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -31,12 +32,12 @@ public class RecursiveBacktrackerGeneratorTest {
     private Timer timer;
 
     private MazeGridPanel mazeGridPanel;
-    private RecursiveBacktrackerGenerator generator;
+    private AldousBroderGenerator generator;
 
     @Before
     public void setUp() throws Exception {
         mazeGridPanel = spy(new MazeGridPanel(32, 32));
-        generator = new RecursiveBacktrackerGenerator(mazeGridPanel);
+        generator = new AldousBroderGenerator(mazeGridPanel);
         doNothing().when(mazeGridPanel).repaint();
         doNothing().when(timer).start();
         Maze.generated = false;

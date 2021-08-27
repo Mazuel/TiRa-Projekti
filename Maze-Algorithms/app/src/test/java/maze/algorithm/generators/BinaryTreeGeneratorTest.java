@@ -40,6 +40,7 @@ public class BinaryTreeGeneratorTest {
         doNothing().when(mazeGridPanel).repaint();
         doNothing().when(timer).start();
         Maze.generated = false;
+        Maze.solved = false;
     }
 
     private void generateMaze() {
@@ -59,6 +60,7 @@ public class BinaryTreeGeneratorTest {
     @Test
     public void shouldHaveGeneratedValidMaze() {
         generateMaze();
+        mazeGridPanel.getGrid().setAllUnvisited();
         BfsSolver solver = new BfsSolver(mazeGridPanel);
         while (!Maze.solved) {
             solver.solve();

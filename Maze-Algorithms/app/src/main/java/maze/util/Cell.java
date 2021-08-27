@@ -147,6 +147,14 @@ public class Cell {
         }
     }
 
+    public void resetCell() {
+        walls = new boolean[] { true, true, true, true };
+        cursor = false;
+        visited = false;
+        recursiveVisit = false;
+        bfsShortestPath = false;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -248,7 +256,4 @@ public class Cell {
     public void setBfsShortestPath(boolean bfsShortestPath) {
         this.bfsShortestPath = bfsShortestPath;
     }
-
-    
-
 }

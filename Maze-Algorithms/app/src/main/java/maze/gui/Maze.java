@@ -9,17 +9,22 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Hashtable;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
 import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import maze.algorithms.solvers.BfsSolver;
 import maze.util.GeneratorAlgorithm;
@@ -28,9 +33,10 @@ public class Maze {
 
     public static final int WIDTH = 800;
     public static final int HEIGHT = WIDTH; // Sama kuin leveys, jotta voidaan pitää näkymä symmetrisenä.
-    public static final int CELL_SIZE = WIDTH / 16;
+    private static int CELL_DIVIDER = 16; // 8, 16, 48, 80
+    public static int CELL_SIZE = 50;
     public static final int START_CELL = 0;
-    public int renderSpeed = 5; // viive algoritmien 'askelien' välissä millisekunteina
+    public int renderSpeed = 1; // viive algoritmien 'askelien' välissä millisekunteina
 
     private int mazeColumns, mazeRows;
     private JFrame mainFrame;
@@ -38,8 +44,22 @@ public class Maze {
     public static boolean generated = false;
     public static boolean solved = false;
     private boolean solvingInAction = false;
+    private boolean generatorInAction = false;
 
     public static void main(String[] args) {
+        try {
+            String argument = args[0];
+            if (argument.equals("small")) {
+                CELL_DIVIDER = 16;
+            } else if (argument.equals("medium")) {
+                CELL_DIVIDER = 48;
+            } else if (argument.equals("large")) {
+                CELL_DIVIDER = 80;
+            }
+        } catch (ArrayIndexOutOfBoundsException eBoundsException) {
+            System.out.println("Labyrintin kokoa ei annettu, käytetään oletuksena pientä");
+        }
+        CELL_SIZE = WIDTH / CELL_DIVIDER;
         new Maze();
     }
 
@@ -89,8 +109,10 @@ public class Maze {
 
     private JPanel createMazeBorder(int mazeRows, int mazeColumns) {
         JPanel mazeBorder = new JPanel();
-        mazeBorder.setBounds(0, 0, WIDTH + CELL_SIZE, HEIGHT + CELL_SIZE);
-        mazeBorder.setBorder(BorderFactory.createEmptyBorder(CELL_SIZE, CELL_SIZE, CELL_SIZE, CELL_SIZE));
+        int borderSize = 20;
+        mazeBorder.setBounds(0, 0, WIDTH + borderSize, HEIGHT + borderSize);
+        mazeBorder.setBorder(BorderFactory.createEmptyBorder(borderSize, borderSize, borderSize, borderSize));
+        mazeBorder.setBackground(Color.GRAY);
         return mazeBorder;
     }
 
@@ -116,15 +138,22 @@ public class Maze {
     private JPanel createButtonLayout(MazeGridPanel mazeGridPanel, JComboBox<AlgorithmComboItem> algorithmOptions) {
         JButton runButton = new JButton("Suorita");
         JButton resetButton = new JButton("Resetoi näkymä");
-        JButton solveMaze = new JButton("Validoi labyrintti");
+        JButton solveMaze = new JButton("Ratkaise labyrintti");
+
+        JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 20, 5);
+        Hashtable<Integer, JLabel> sliderLabels = new Hashtable<>();
+        sliderLabels.put(0, new JLabel("Nopea"));
+        sliderLabels.put(20, new JLabel("Hidas"));
+        slider.setLabelTable(sliderLabels);
+        slider.setPaintLabels(true);
 
         CardLayout cardLayout = new CardLayout(15, 15);
         JPanel buttonCards = new JPanel(cardLayout);
 
-        JPanel runButtonCard = new JPanel();
-        JPanel resetButtonCard = new JPanel();
-        runButtonCard.setLayout(new GridBagLayout());
-        resetButtonCard.setLayout(new GridBagLayout());
+        JPanel card1 = new JPanel();
+        JPanel card2 = new JPanel();
+        card1.setLayout(new GridBagLayout());
+        card2.setLayout(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.fill = GridBagConstraints.BOTH;
         constraints.gridwidth = 12;
@@ -133,20 +162,25 @@ public class Maze {
         constraints.gridx = 0;
         constraints.gridy = 0;
 
-        runButtonCard.add(algorithmOptions, constraints);
-        resetButtonCard.add(solveMaze, constraints);
+        card1.add(algorithmOptions, constraints);
+        card2.add(solveMaze, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 1;
 
-        runButtonCard.add(runButton, constraints);
-        resetButtonCard.add(resetButton, constraints);
+        card1.add(runButton, constraints);
+        card2.add(resetButton, constraints);
+
+        constraints.gridx = 2;
+        constraints.gridy = 2;
+
+        card1.add(slider, constraints);
 
         buttonCards.setBorder(BorderFactory.createEmptyBorder(0, CELL_SIZE, CELL_SIZE, CELL_SIZE));
 
         buttonCards.setOpaque(false);
-        buttonCards.add(runButtonCard, "Suorita");
-        buttonCards.add(resetButtonCard, "Resetoi näkymä");
+        buttonCards.add(card1, "1");
+        buttonCards.add(card2, "2");
 
         runButton.addActionListener(event -> {
             generated = false;
@@ -158,14 +192,17 @@ public class Maze {
 
         resetButton.addActionListener(event -> {
             if (generated && !solvingInAction) {
-                createGUI();
+                resetGUI(mazeGridPanel);
+                cardLayout.next(buttonCards);
+                solved = false;
             } else {
                 JOptionPane.showMessageDialog(mainFrame, "Odota, että algoritmi on suorittanut loppuun");
             }
         });
 
         solveMaze.addActionListener(event -> {
-            if (!solvingInAction) {
+            if (!solvingInAction && !generatorInAction && !solved) {
+                System.out.println("hello");
                 BfsSolver bfsSolver = new BfsSolver(mazeGridPanel);
                 solvingInAction = true;
                 final Timer timer = new Timer(renderSpeed, null);
@@ -176,23 +213,38 @@ public class Maze {
                             bfsSolver.solve();
                         } else {
                             solvingInAction = false;
-                            solved = false;
                             timer.stop();
                         }
                         mazeGridPanel.repaint();
                     }
                 });
                 timer.start();
+            } else if (solved) {
+                JOptionPane.showMessageDialog(mainFrame,
+                        "Labyrintti on jo ratkaistu, resetoi näkymä suorittaaksesi uudelleen.");
             } else {
                 JOptionPane.showMessageDialog(mainFrame, "Algoritmi on jo käynnissä!");
+            }
+        });
+
+        slider.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                renderSpeed = slider.getValue();
+                System.out.println(slider.getValue());
             }
         });
 
         return buttonCards;
     }
 
+    private void resetGUI(MazeGridPanel gridPanel) {
+        gridPanel.resetGrid();
+        gridPanel.repaint();
+    }
+
     public void createAndStartTimer(GeneratorAlgorithm algorithm, MazeGridPanel mazeGridPanel) {
         Timer timer = new Timer(renderSpeed, null);
+        generatorInAction = true;
         timer.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -200,6 +252,7 @@ public class Maze {
                     algorithm.generate();
                 } else {
                     mazeGridPanel.getGrid().setAllUnvisited();
+                    generatorInAction = false;
                     timer.stop();
                 }
                 mazeGridPanel.repaint();

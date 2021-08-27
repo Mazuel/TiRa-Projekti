@@ -63,6 +63,7 @@ public class AldousBroderGenerator implements GeneratorAlgorithm {
 
         Maze.generated = grid.isAllVisited();
         if (Maze.generated) {
+            previousCell.setCursor(false);
             currentCell.setCursor(false);
         }
     }

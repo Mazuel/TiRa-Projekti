@@ -43,16 +43,16 @@ public class MazeGridPanel extends JPanel {
 
     public GeneratorAlgorithm createAlgorithm(AlgorithmOption algorithm) {
         switch (algorithm) {
-            case BINARY_TREE:
-                return new BinaryTreeGenerator(this);
-            case ALDOUS_BRODER:
-                return new AldousBroderGenerator(this);
-            case PRIMS:
-                return new PrimsGenerator(this);
-            case RECURSIVE_BACKTRACKER:
-                return new RecursiveBacktrackerGenerator(this);
-            default:
-                return null;
+        case BINARY_TREE:
+            return new BinaryTreeGenerator(this);
+        case ALDOUS_BRODER:
+            return new AldousBroderGenerator(this);
+        case PRIMS:
+            return new PrimsGenerator(this);
+        case RECURSIVE_BACKTRACKER:
+            return new RecursiveBacktrackerGenerator(this);
+        default:
+            return null;
         }
     }
 
@@ -78,8 +78,8 @@ public class MazeGridPanel extends JPanel {
         }
 
         if (cell.isBfsShortestPath()) {
-            graphics.setColor(Color.BLACK);
-            graphics.fillRect(xLocation + 20, yLocation + 20, Maze.CELL_SIZE - 40 , Maze.CELL_SIZE - 40);
+            graphics.setColor(new Color(0, 179, 255));
+            graphics.fillRect(xLocation, yLocation, Maze.CELL_SIZE, Maze.CELL_SIZE);
         }
         drawWalls(graphics, xLocation, yLocation, cell);
 
@@ -111,6 +111,12 @@ public class MazeGridPanel extends JPanel {
         // Vasen
         if (walls[3]) {
             graphics.drawLine(xLocation, yLocation + Maze.CELL_SIZE, xLocation, yLocation);
+        }
+    }
+
+    public void resetGrid() {
+        for (int i = 0; i < grid.size(); i++) {
+            grid.get(i).resetCell();
         }
     }
 

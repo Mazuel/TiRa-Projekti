@@ -1,12 +1,12 @@
 package maze.algorithm.solvers;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 
-import javax.swing.Timer;
 import java.awt.Graphics;
+
+import javax.swing.Timer;
 
 import org.junit.Before;
 import org.junit.Rule;
