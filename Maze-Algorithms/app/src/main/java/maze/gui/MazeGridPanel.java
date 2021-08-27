@@ -76,6 +76,11 @@ public class MazeGridPanel extends JPanel {
             graphics.setColor(Color.PINK);
             graphics.fillRect(xLocation, yLocation, Maze.CELL_SIZE, Maze.CELL_SIZE);
         }
+
+        if (cell.isBfsShortestPath()) {
+            graphics.setColor(Color.BLACK);
+            graphics.fillRect(xLocation + 20, yLocation + 20, Maze.CELL_SIZE - 40 , Maze.CELL_SIZE - 40);
+        }
         drawWalls(graphics, xLocation, yLocation, cell);
 
     }

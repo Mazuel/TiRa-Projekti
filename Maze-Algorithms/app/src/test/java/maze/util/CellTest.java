@@ -193,13 +193,14 @@ public class CellTest {
         Cell bottomNeighbour = new Cell(10, 11);
         Cell leftNeighbour = new Cell(11, 10);
         Cell rightNeighbour = new Cell(9, 10);
+
         Cell farRightNeihbour = new Cell(8, 10);
 
         currentCell.setWalls(new boolean[] { true, false, true, false });
-        leftNeighbour.setWalls(new boolean[] { true, false, true, true });
-        rightNeighbour.setWalls(new boolean[] { true, true, true, false });
-        bottomNeighbour.setWalls(new boolean[] { true, false, true, false });
-        topNeighbour.setWalls(new boolean[] { true, false, true, false });
+        topNeighbour.setWalls(new boolean[] { true, true, true, true });
+        bottomNeighbour.setWalls(new boolean[] { true, true, true, true });
+        leftNeighbour.setWalls(new boolean[] { true, true, true, false });
+        rightNeighbour.setWalls(new boolean[] { true, true, true, true });
 
         rightNeighbour.setVisited(true);
 

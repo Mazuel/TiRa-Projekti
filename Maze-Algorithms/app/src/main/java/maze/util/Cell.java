@@ -7,6 +7,8 @@ public class Cell {
     private boolean[] walls = { true, true, true, true };
     private boolean cursor = false;
     private boolean recursiveVisit = false;
+    private boolean bfsShortestPath = false;
+    private Cell parent;
 
     public Cell(int x, int y) {
         this.x = x;
@@ -223,8 +225,30 @@ public class Cell {
     }
 
     @ExcludeFromJacocoGeneratedReport
-    public void setRecursiveVisit(boolean deadEnd) {
-        this.recursiveVisit = deadEnd;
+    public void setRecursiveVisit(boolean recursiveVisit) {
+        this.recursiveVisit = recursiveVisit;
     }
+
+    @ExcludeFromJacocoGeneratedReport
+    public Cell getParent() {
+        return parent;
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    public void setParent(Cell parent) {
+        this.parent = parent;
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    public boolean isBfsShortestPath() {
+        return bfsShortestPath;
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    public void setBfsShortestPath(boolean bfsShortestPath) {
+        this.bfsShortestPath = bfsShortestPath;
+    }
+
+    
 
 }
