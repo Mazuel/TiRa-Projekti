@@ -36,7 +36,7 @@ public class Maze {
     private static int CELL_DIVIDER = 16; // 8, 16, 48, 80
     public static int CELL_SIZE = 50;
     public static final int START_CELL = 0;
-    public int renderSpeed = 1; // viive algoritmien 'askelien' välissä millisekunteina
+    private int algorithmSpeed = 1; // viive algoritmien 'askelien' välissä millisekunteina
 
     private int mazeColumns, mazeRows;
     private JFrame mainFrame;
@@ -205,7 +205,7 @@ public class Maze {
                 System.out.println("hello");
                 BfsSolver bfsSolver = new BfsSolver(mazeGridPanel);
                 solvingInAction = true;
-                final Timer timer = new Timer(renderSpeed, null);
+                final Timer timer = new Timer(algorithmSpeed, null);
                 timer.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -229,7 +229,7 @@ public class Maze {
 
         slider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-                renderSpeed = slider.getValue();
+                algorithmSpeed = slider.getValue();
                 System.out.println(slider.getValue());
             }
         });
@@ -243,7 +243,7 @@ public class Maze {
     }
 
     public void createAndStartTimer(GeneratorAlgorithm algorithm, MazeGridPanel mazeGridPanel) {
-        Timer timer = new Timer(renderSpeed, null);
+        Timer timer = new Timer(algorithmSpeed, null);
         generatorInAction = true;
         timer.addActionListener(new ActionListener() {
             @Override
