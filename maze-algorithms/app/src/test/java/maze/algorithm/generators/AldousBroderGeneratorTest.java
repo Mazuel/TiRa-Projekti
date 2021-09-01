@@ -35,7 +35,7 @@ public class AldousBroderGeneratorTest {
     private AldousBroderGenerator generator;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         mazeGridPanel = spy(new MazeGridPanel(32, 32));
         generator = new AldousBroderGenerator(mazeGridPanel);
         doNothing().when(mazeGridPanel).repaint();

@@ -34,7 +34,7 @@ public class RecursiveBacktrackerGeneratorTest {
     private RecursiveBacktrackerGenerator generator;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         mazeGridPanel = spy(new MazeGridPanel(32, 32));
         generator = new RecursiveBacktrackerGenerator(mazeGridPanel);
         doNothing().when(mazeGridPanel).repaint();

@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 
 import maze.algorithms.generators.AldousBroderGenerator;
 import maze.algorithms.generators.BinaryTreeGenerator;
+import maze.algorithms.generators.HuntAndKillGenerator;
 import maze.algorithms.generators.PrimsGenerator;
 import maze.algorithms.generators.RecursiveBacktrackerGenerator;
 import maze.util.Cell;
@@ -43,16 +44,18 @@ public class MazeGridPanel extends JPanel {
 
     public GeneratorAlgorithm createAlgorithm(AlgorithmOption algorithm) {
         switch (algorithm) {
-        case BINARY_TREE:
-            return new BinaryTreeGenerator(this);
-        case ALDOUS_BRODER:
-            return new AldousBroderGenerator(this);
-        case PRIMS:
-            return new PrimsGenerator(this);
-        case RECURSIVE_BACKTRACKER:
-            return new RecursiveBacktrackerGenerator(this);
-        default:
-            return null;
+            case BINARY_TREE:
+                return new BinaryTreeGenerator(this);
+            case ALDOUS_BRODER:
+                return new AldousBroderGenerator(this);
+            case PRIMS:
+                return new PrimsGenerator(this);
+            case RECURSIVE_BACKTRACKER:
+                return new RecursiveBacktrackerGenerator(this);
+            case HUNT_AND_KILL:
+                return new HuntAndKillGenerator(this);
+            default:
+                return null;
         }
     }
 

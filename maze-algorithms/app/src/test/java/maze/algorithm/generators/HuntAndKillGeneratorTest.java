@@ -5,9 +5,9 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 
-import java.awt.Graphics;
-
 import javax.swing.Timer;
+
+import java.awt.Graphics;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -16,13 +16,12 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import maze.algorithms.generators.PrimsGenerator;
+import maze.algorithms.generators.HuntAndKillGenerator;
 import maze.algorithms.solvers.BfsSolver;
 import maze.gui.Maze;
 import maze.gui.MazeGridPanel;
 
-public class PrimsGeneratorTest {
-
+public class HuntAndKillGeneratorTest {
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
     @Mock
@@ -31,12 +30,12 @@ public class PrimsGeneratorTest {
     private Timer timer;
 
     private MazeGridPanel mazeGridPanel;
-    private PrimsGenerator generator;
+    private HuntAndKillGenerator generator;
 
     @Before
     public void setUp() {
         mazeGridPanel = spy(new MazeGridPanel(32, 32));
-        generator = new PrimsGenerator(mazeGridPanel);
+        generator = new HuntAndKillGenerator(mazeGridPanel);
         doNothing().when(mazeGridPanel).repaint();
         doNothing().when(timer).start();
         Maze.generated = false;

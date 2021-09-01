@@ -64,9 +64,6 @@ public class Maze {
     }
 
     public Maze() {
-        // Jaetaan solujen leveys solun koolla, jotta voidaan luoda oikea määrä soluja
-        // käsiteltävään listaan ja pidetään rivien ja kolumnien määrä samana, jotta
-        // symmetrisyys säilyy
         mazeColumns = Math.floorDiv(WIDTH, CELL_SIZE);
         mazeRows = mazeColumns;
 
@@ -131,7 +128,9 @@ public class Maze {
         algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.ALDOUS_BRODER, "Aldous-Broder"));
         algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.PRIMS, "Primin algoritmi"));
         algorithmOptions
-                .addItem(new AlgorithmComboItem(AlgorithmOption.RECURSIVE_BACKTRACKER, "Recursive Backtracker"));
+                .addItem(new AlgorithmComboItem(AlgorithmOption.RECURSIVE_BACKTRACKER, "Satunnaistettu syvyyshaku"));
+        algorithmOptions
+                .addItem(new AlgorithmComboItem(AlgorithmOption.HUNT_AND_KILL, "'Metsästä ja tapa' (Hunt and kill)"));
         return algorithmOptions;
     }
 
@@ -202,7 +201,6 @@ public class Maze {
 
         solveMaze.addActionListener(event -> {
             if (!solvingInAction && !generatorInAction && !solved) {
-                System.out.println("hello");
                 BfsSolver bfsSolver = new BfsSolver(mazeGridPanel);
                 solvingInAction = true;
                 final Timer timer = new Timer(algorithmSpeed, null);
@@ -230,7 +228,7 @@ public class Maze {
         slider.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 algorithmSpeed = slider.getValue();
-                System.out.println(slider.getValue());
+                // System.out.println(slider.getValue());
             }
         });
 

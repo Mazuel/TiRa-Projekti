@@ -34,7 +34,7 @@ public class BinaryTreeGeneratorTest {
     private BinaryTreeGenerator generator;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         mazeGridPanel = spy(new MazeGridPanel(32, 32));
         generator = new BinaryTreeGenerator(mazeGridPanel);
         doNothing().when(mazeGridPanel).repaint();
