@@ -1,5 +1,7 @@
 package maze.util;
 
+import java.util.Random;
+
 public class CellList {
 
     private int size = 0;
@@ -23,6 +25,15 @@ public class CellList {
     public Cell get(int index) {
         checkIndexInBounds(index);
         return cells[index];
+    }
+
+    public Cell get(Cell cell) {
+        for (int i = 0; i < size; i++) {
+            if (cell == cells[i]) {
+                return cells[i];
+            }
+        }
+        return null;
     }
 
     public Cell remove(int index) {
@@ -88,6 +99,17 @@ public class CellList {
             }
         }
         return -1;
+    }
+
+    public void shuffle() {
+        Random random = new Random();
+        for (int i = size - 1; i > 0; i--) {
+            int randomIndex = random.nextInt(i + 1);
+
+            Cell temp = cells[i];
+            cells[i] = cells[randomIndex];
+            cells[randomIndex] = temp;
+        }
     }
 
     @Override

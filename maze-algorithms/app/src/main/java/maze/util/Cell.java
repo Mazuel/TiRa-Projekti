@@ -1,7 +1,7 @@
 package maze.util;
 
 public class Cell {
-    private int x, y;
+    private int x, y, id;
 
     private boolean visited = false;
     private boolean[] walls = { true, true, true, true };
@@ -256,4 +256,15 @@ public class Cell {
     public void setBfsShortestPath(boolean bfsShortestPath) {
         this.bfsShortestPath = bfsShortestPath;
     }
+
+    @ExcludeFromJacocoGeneratedReport
+    public int getId() {
+        return id;
+    }
+
+    @ExcludeFromJacocoGeneratedReport
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

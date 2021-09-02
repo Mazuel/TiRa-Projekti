@@ -131,6 +131,7 @@ public class Maze {
                 .addItem(new AlgorithmComboItem(AlgorithmOption.RECURSIVE_BACKTRACKER, "Satunnaistettu syvyyshaku"));
         algorithmOptions
                 .addItem(new AlgorithmComboItem(AlgorithmOption.HUNT_AND_KILL, "'Metsästä ja tapa' (Hunt and kill)"));
+        algorithmOptions.addItem(new AlgorithmComboItem(AlgorithmOption.KRUSKALS, "Kruskalin algoritmi"));
         return algorithmOptions;
     }
 
@@ -185,7 +186,7 @@ public class Maze {
             generated = false;
             AlgorithmComboItem item = (AlgorithmComboItem) algorithmOptions.getSelectedItem();
             GeneratorAlgorithm algorithm = mazeGridPanel.createAlgorithm(item.getAlgorithm());
-            createAndStartTimer(algorithm, mazeGridPanel);
+            createAndStartGeneratorTimer(algorithm, mazeGridPanel);
             cardLayout.next(buttonCards);
         });
 
@@ -240,7 +241,7 @@ public class Maze {
         gridPanel.repaint();
     }
 
-    public void createAndStartTimer(GeneratorAlgorithm algorithm, MazeGridPanel mazeGridPanel) {
+    public void createAndStartGeneratorTimer(GeneratorAlgorithm algorithm, MazeGridPanel mazeGridPanel) {
         Timer timer = new Timer(algorithmSpeed, null);
         generatorInAction = true;
         timer.addActionListener(new ActionListener() {

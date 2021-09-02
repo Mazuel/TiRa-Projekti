@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import maze.algorithms.generators.AldousBroderGenerator;
 import maze.algorithms.generators.BinaryTreeGenerator;
 import maze.algorithms.generators.HuntAndKillGenerator;
+import maze.algorithms.generators.KruskalsGenerator;
 import maze.algorithms.generators.PrimsGenerator;
 import maze.algorithms.generators.RecursiveBacktrackerGenerator;
 import maze.util.Cell;
@@ -22,8 +23,8 @@ public class MazeGridPanel extends JPanel {
     private final Color wallColor = Color.BLACK;
 
     public MazeGridPanel(int rows, int cols) {
-        for (int x = 0; x < rows; x++) {
-            for (int y = 0; y < cols; y++) {
+        for (int y = 0; y < rows; y++) {
+            for (int x = 0; x < cols; x++) {
                 grid.add(new Cell(x, y));
             }
         }
@@ -54,6 +55,8 @@ public class MazeGridPanel extends JPanel {
                 return new RecursiveBacktrackerGenerator(this);
             case HUNT_AND_KILL:
                 return new HuntAndKillGenerator(this);
+            case KRUSKALS:
+                return new KruskalsGenerator(this);
             default:
                 return null;
         }
