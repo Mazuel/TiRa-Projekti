@@ -45,7 +45,7 @@ public class KruskalsGenerator implements GeneratorAlgorithm {
 
     public void generate() {
         currentCell = stack.pop();
-        currentCell.setVisited(true);
+        grid.markCellAsVisited(currentCell);
 
         CellList neighbours = currentCell.getNeighbours(grid);
 
@@ -53,7 +53,7 @@ public class KruskalsGenerator implements GeneratorAlgorithm {
             Cell neighbour = neighbours.get(i);
             if (disjointSet.find(currentCell.getId()) != disjointSet.find(neighbour.getId())) {
                 currentCell.removeWall(neighbour);
-                neighbour.setVisited(true);
+                grid.markCellAsVisited(neighbour);
                 disjointSet.union(currentCell.getId(), neighbour.getId());
             }
         }

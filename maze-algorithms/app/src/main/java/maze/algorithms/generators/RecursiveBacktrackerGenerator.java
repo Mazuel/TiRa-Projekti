@@ -38,7 +38,7 @@ public class RecursiveBacktrackerGenerator implements GeneratorAlgorithm {
 
     @Override
     public void generate() {
-        currentCell.setVisited(true);
+        grid.markCellAsVisited(currentCell);
 
         CellList unvisitedNeighbours = currentCell.getUnvisitedNeighbours(grid);
         Cell nextDirection = null;

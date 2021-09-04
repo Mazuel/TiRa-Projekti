@@ -43,7 +43,7 @@ public class PrimsGenerator implements GeneratorAlgorithm {
         this.frontierCells = new HashSet<Cell>();
         this.visitedCells = new HashSet<Cell>();
         visitedCells.add(currentCell);
-        currentCell.setVisited(true);
+        grid.markCellAsVisited(currentCell);
 
     }
 
@@ -62,7 +62,7 @@ public class PrimsGenerator implements GeneratorAlgorithm {
         currentCell = frontierCellArray.get(randomCellPicker.nextInt(frontierCellArray.size()));
         frontierCells.remove(currentCell);
         visitedCells.add(currentCell);
-        currentCell.setVisited(true);
+        grid.markCellAsVisited(currentCell);
         currentCell.setCursor(false);
 
         CellList visitedNeighbours = currentCell.getVisitedNeighbours(grid);

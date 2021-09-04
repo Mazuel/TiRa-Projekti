@@ -64,7 +64,7 @@ public class AldousBroderGenerator implements GeneratorAlgorithm {
             currentCell.removeWall(nextCell);
         }
 
-        currentCell.setVisited(true);
+        grid.markCellAsVisited(currentCell);
         currentCell.setCursor(true);
 
         previousCell = currentCell;

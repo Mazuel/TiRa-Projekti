@@ -8,6 +8,8 @@ public class CellList {
 
     private Cell[] cells;
 
+    private int visitedCells = 0;
+
     public CellList() {
         cells = new Cell[DEFAULT_SIZE];
     }
@@ -73,6 +75,7 @@ public class CellList {
             cells[i].setVisited(false);
             cells[i].setRecursiveVisit(false);
         }
+        resetVisitedCells();
     }
 
     /**
@@ -81,12 +84,18 @@ public class CellList {
      * @return boolean
      */
     public boolean isAllVisited() {
-        for (int i = 0; i < size; i++) {
-            if (!cells[i].isVisited()) {
-                return false;
-            }
-        }
-        return true;
+        // for (int i = 0; i < size; i++) {
+        // if (!cells[i].isVisited()) {
+        // return false;
+        // }
+        // }
+        // return true;
+        return visitedCells == size - 1 ? true : false;
+    }
+
+    public void markCellAsVisited(Cell cell) {
+        cell.setVisited(true);
+        visitedCells++;
     }
 
     /**
@@ -129,6 +138,10 @@ public class CellList {
             }
         }
         return -1;
+    }
+
+    public void resetVisitedCells() {
+        visitedCells = 0;
     }
 
     /**

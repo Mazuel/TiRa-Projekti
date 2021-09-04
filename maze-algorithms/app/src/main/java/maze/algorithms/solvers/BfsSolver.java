@@ -26,7 +26,7 @@ public class BfsSolver {
      */
     public void solve() {
         Cell currentCell = cellQueue.pop();
-        currentCell.setVisited(true);
+        grid.markCellAsVisited(currentCell);
 
         if (currentCell == endPoint) {
             colorPath(currentCell);
@@ -35,7 +35,7 @@ public class BfsSolver {
         CellList neighbours = currentCell.getUnvisitedValidMoveNeighbours(grid);
         for (int i = 0; i < neighbours.size(); i++) {
             Cell neighbour = neighbours.get(i);
-            neighbour.setVisited(true);
+            grid.markCellAsVisited(neighbour);
             neighbour.setParent(currentCell);
             cellQueue.enqueue(neighbour);
         }

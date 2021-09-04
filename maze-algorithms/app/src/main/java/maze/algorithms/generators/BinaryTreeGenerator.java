@@ -57,7 +57,7 @@ public class BinaryTreeGenerator implements GeneratorAlgorithm {
         } else if (topNeighbour != null) {
             currentCell.removeWall(topNeighbour);
         }
-        currentCell.setVisited(true);
+        grid.markCellAsVisited(currentCell);
         currentCell.setCursor(true);
 
         if (index - 1 >= 0) {

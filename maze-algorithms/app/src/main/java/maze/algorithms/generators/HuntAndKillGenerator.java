@@ -35,17 +35,16 @@ public class HuntAndKillGenerator implements GeneratorAlgorithm {
 
     private CellList grid;
     private Cell currentCell;
-    private Random random;
+    private Random random = new Random();;
 
     public HuntAndKillGenerator(MazeGridPanel gridPanel) {
-        this.random = new Random();
         this.grid = gridPanel.getGrid();
         currentCell = grid.get(random.nextInt(grid.size()));
     }
 
     @Override
     public void generate() {
-        currentCell.setVisited(true);
+        grid.markCellAsVisited(currentCell);
         CellList unvisitedNeighbours = currentCell.getUnvisitedNeighbours(grid);
 
         if (unvisitedNeighbours.size() > 0) {
@@ -55,7 +54,9 @@ public class HuntAndKillGenerator implements GeneratorAlgorithm {
         } else {
             for (int i = 0; i < grid.size(); i++) {
                 Cell cell = grid.get(i);
-                if (cell.getUnvisitedNeighbours(grid).size() > 0 && cell.isVisited()) {
+                CellList visitedNeighbours = cell.getVisitedNeighbours(grid);
+                if (visitedNeighbours.size() > 0 && !cell.isVisited()) {
+                    cell.removeWall(visitedNeighbours.get(random.nextInt(visitedNeighbours.size())));
                     currentCell = cell;
                     break;
                 }

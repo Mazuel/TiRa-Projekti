@@ -4,9 +4,13 @@ public class Cell {
     private int x, y, id;
 
     private boolean visited = false;
+    private int TOP = 0;
+    private int RIGHT = 1;
+    private int BOTTOM = 2;
+    private int LEFT = 3;
     private boolean[] walls = { true, true, true, true };
     private boolean cursor = false;
-    private boolean recursiveVisit = false;
+    private boolean deadEnd = false;
     private boolean bfsShortestPath = false;
     private Cell parent;
 
@@ -37,22 +41,22 @@ public class Cell {
 
         if (x == 1) {
             // Vasen seinä
-            walls[3] = false;
-            neighbour.walls[1] = false;
+            walls[LEFT] = false;
+            neighbour.walls[RIGHT] = false;
         } else if (x == -1) {
             // Oikea seinä
-            walls[1] = false;
-            neighbour.walls[3] = false;
+            walls[RIGHT] = false;
+            neighbour.walls[LEFT] = false;
         }
 
         if (y == 1) {
             // Ylä seinä
-            walls[0] = false;
-            neighbour.walls[2] = false;
+            walls[TOP] = false;
+            neighbour.walls[BOTTOM] = false;
         } else if (y == -1) {
             // Ala seinä
-            walls[2] = false;
-            neighbour.walls[0] = false;
+            walls[BOTTOM] = false;
+            neighbour.walls[TOP] = false;
         }
     }
 
@@ -158,18 +162,18 @@ public class Cell {
 
         if (x == 1) {
             // Vasen seinä
-            return !(walls[3] || neighbour.walls[1]);
+            return !(walls[LEFT] || neighbour.walls[RIGHT]);
         } else if (x == -1) {
             // Oikea seinä
-            return !(walls[1] || neighbour.walls[3]);
+            return !(walls[RIGHT] || neighbour.walls[LEFT]);
         }
 
         if (y == 1) {
             // Ylä seinä
-            return !(walls[0] || neighbour.walls[2]);
+            return !(walls[TOP] || neighbour.walls[BOTTOM]);
         } else if (y == -1) {
             // Ala seinä
-            return !(walls[2] || neighbour.walls[0]);
+            return !(walls[BOTTOM] || neighbour.walls[TOP]);
         } else {
             return false;
         }
@@ -199,7 +203,7 @@ public class Cell {
         walls = new boolean[] { true, true, true, true };
         cursor = false;
         visited = false;
-        recursiveVisit = false;
+        deadEnd = false;
         bfsShortestPath = false;
     }
 
@@ -320,15 +324,15 @@ public class Cell {
      */
     @ExcludeFromJacocoGeneratedReport
     public boolean isRecursiveVisit() {
-        return recursiveVisit;
+        return deadEnd;
     }
 
     /**
      * @param recursiveVisit
      */
     @ExcludeFromJacocoGeneratedReport
-    public void setRecursiveVisit(boolean recursiveVisit) {
-        this.recursiveVisit = recursiveVisit;
+    public void setRecursiveVisit(boolean deadEnd) {
+        this.deadEnd = deadEnd;
     }
 
     /**
