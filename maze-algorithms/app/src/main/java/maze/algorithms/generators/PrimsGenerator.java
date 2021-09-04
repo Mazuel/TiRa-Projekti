@@ -9,6 +9,23 @@ import maze.util.Cell;
 import maze.util.CellList;
 import maze.util.GeneratorAlgorithm;
 
+/**
+ * Primin algoritmi </br>
+ * 
+ * 1. Valitaan satunnaisesti solu, josta aloitetaan ja asetataan se vierailluksi
+ * </br>
+ * 
+ * 2. Lisätään käsiteltävän solun naapurit 'rajasolu' -joukkoon
+ * 
+ * 3. Valitaan satunnaisesti seuraavaksi käsiteltävä solu 'rajasolu' -joukosta.
+ * Merkitään tämä uusi käsittelyssä oleva solu vierailluksi. </br>
+ * 
+ * 4. Valitaan satunnaisesti käsiteltävänä olevan solun naapuri, jossa on jo
+ * vierailtu ja poistetaan näiden väliltä seinä.</br>
+ * 
+ * 5. Toistetaan askelia 2-4, kunnes 'rajasolu' -joukko on tyhjä
+ * 
+ */
 public class PrimsGenerator implements GeneratorAlgorithm {
 
     private final CellList grid;
@@ -34,6 +51,7 @@ public class PrimsGenerator implements GeneratorAlgorithm {
     public void generate() {
         CellList neighbours = currentCell.getUnvisitedNeighbours(grid);
         for (int i = 0; i < neighbours.size(); i++) {
+            neighbours.get(i).setCursor(true);
             frontierCells.add(neighbours.get(i));
         }
 
@@ -45,6 +63,7 @@ public class PrimsGenerator implements GeneratorAlgorithm {
         frontierCells.remove(currentCell);
         visitedCells.add(currentCell);
         currentCell.setVisited(true);
+        currentCell.setCursor(false);
 
         CellList visitedNeighbours = currentCell.getVisitedNeighbours(grid);
 

@@ -16,7 +16,12 @@ public class CellQueue {
         realSize = 0;
     }
 
-    public void push(Cell cell) {
+    /**
+     * Lisää jonon perälle solun
+     * 
+     * @param cell
+     */
+    public void enqueue(Cell cell) {
         if (isFull()) {
             ensureCapacity();
         }
@@ -27,6 +32,12 @@ public class CellQueue {
 
     }
 
+    /**
+     * Poistaa ja palauttaa jonossa ensimmäiseksi olevan solun
+     * 
+     * @throws QueueEmptyException
+     * @return Cell
+     */
     public Cell pop() {
         if (isEmpty()) {
             throw new QueueEmptyException("Cannot remove from empty queue");
@@ -35,14 +46,29 @@ public class CellQueue {
         return queueItems[first++];
     }
 
+    /**
+     * Palauttaa totuusarvon siitä onko jono tyhjä
+     * 
+     * @return boolean
+     */
     public boolean isEmpty() {
         return currentSize == 0;
     }
 
+    /**
+     * Kertoo onko jono täynnä
+     * 
+     * @return boolean
+     */
     public boolean isFull() {
         return realSize == capacity;
     }
 
+    /**
+     * Palauttaa jonon koon
+     * 
+     * @return int
+     */
     public int size() {
         return currentSize;
     }

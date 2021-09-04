@@ -1,7 +1,5 @@
 package maze.util;
 
-import java.util.Random;
-
 public class CellList {
 
     private int size = 0;
@@ -14,6 +12,11 @@ public class CellList {
         cells = new Cell[DEFAULT_SIZE];
     }
 
+    /**
+     * Lisää solun listaan
+     * 
+     * @param cell
+     */
     public void add(Cell cell) {
         if (size == cells.length) {
             ensureCapacity();
@@ -22,20 +25,22 @@ public class CellList {
         cells[size++] = cell;
     }
 
+    /**
+     * Palauttaa indeksissä olevan solun, mikäli indeksi on validi
+     * 
+     * @param index
+     * @throws IndexOutOfBoundsException
+     * @return Cell
+     */
     public Cell get(int index) {
         checkIndexInBounds(index);
         return cells[index];
     }
 
-    public Cell get(Cell cell) {
-        for (int i = 0; i < size; i++) {
-            if (cell == cells[i]) {
-                return cells[i];
-            }
-        }
-        return null;
-    }
-
+    /**
+     * @param index
+     * @return Cell
+     */
     public Cell remove(int index) {
         checkIndexInBounds(index);
         Cell cell = cells[index];
@@ -45,12 +50,20 @@ public class CellList {
         return cell;
     }
 
+    /**
+     * @param index
+     */
     private void checkIndexInBounds(int index) {
         if (index >= size || index < 0) {
             throw new IndexOutOfBoundsException("Index: " + index + ", Size " + index);
         }
     }
 
+    /**
+     * Palauttaa listan koon
+     * 
+     * @return int
+     */
     public int size() {
         return size;
     }
@@ -62,6 +75,11 @@ public class CellList {
         }
     }
 
+    /**
+     * Kertoo onko kaikissa soluissa vierailtu
+     * 
+     * @return boolean
+     */
     public boolean isAllVisited() {
         for (int i = 0; i < size; i++) {
             if (!cells[i].isVisited()) {
@@ -71,6 +89,12 @@ public class CellList {
         return true;
     }
 
+    /**
+     * Kertoo sisältääkö lista solun
+     * 
+     * @param cell
+     * @return boolean
+     */
     public boolean contains(Cell cell) {
         if (cell == null) {
             return false;
@@ -92,6 +116,12 @@ public class CellList {
         cells = copy;
     }
 
+    /**
+     * Palauttaa solun indeksin
+     * 
+     * @param cell
+     * @return int
+     */
     public int indexOf(Cell cell) {
         for (int i = 0; i < size; i++) {
             if (cells[i].equals(cell)) {
@@ -101,17 +131,9 @@ public class CellList {
         return -1;
     }
 
-    public void shuffle() {
-        Random random = new Random();
-        for (int i = size - 1; i > 0; i--) {
-            int randomIndex = random.nextInt(i + 1);
-
-            Cell temp = cells[i];
-            cells[i] = cells[randomIndex];
-            cells[randomIndex] = temp;
-        }
-    }
-
+    /**
+     * @return String
+     */
     @Override
     @ExcludeFromJacocoGeneratedReport
     public String toString() {

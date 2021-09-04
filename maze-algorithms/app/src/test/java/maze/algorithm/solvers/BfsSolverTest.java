@@ -31,6 +31,9 @@ public class BfsSolverTest {
 
     private MazeGridPanel mazeGridPanel;
 
+    /**
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception {
         mazeGridPanel = spy(new MazeGridPanel(32, 32));

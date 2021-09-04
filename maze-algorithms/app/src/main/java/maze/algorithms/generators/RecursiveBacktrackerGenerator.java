@@ -9,6 +9,19 @@ import maze.util.CellList;
 import maze.util.CellStack;
 import maze.util.GeneratorAlgorithm;
 
+/**
+ * Satunnaistetty syvyyshaku </br>
+ * 
+ * 0. Aloitus. Valitaan satunnaisesti solu, josta aloitetaan algoritmin suoritus
+ * 
+ * 1. Valitse nykyisen solun satunnainen naapuri, jossa ei ole vierailtu </br>
+ * 
+ * 2. Jos naapuri löytyi, lisää nykyinen solu pinoon ja poista seinä nykyisen
+ * solun ja naapurin väliltä. Jos naapuria ei löytynyt, otetaan pinosta
+ * aikaisemmin vierailtu solu </br>
+ * 
+ * 3. Toistetaan askelia 1 ja 2 kunnes pino on tyhjä
+ */
 public class RecursiveBacktrackerGenerator implements GeneratorAlgorithm {
 
     private CellList grid;
@@ -22,13 +35,6 @@ public class RecursiveBacktrackerGenerator implements GeneratorAlgorithm {
         this.currentCell = grid.get(randomCellPicker.nextInt(grid.size()));
         this.cellStack = new CellStack(grid.size() * 10);
     }
-
-    // Algoritmin toiminta sen jälkeen kun aloitus solu on valittu:
-    // 1. Valitse nykyisen solun satunnainen naapuri, jossa ei ole vierailtu
-    // 2. Jos naapuri löytyi, lisää nykyinen solu pinoon ja poista seinä nykyisen
-    // solun ja naapurin väliltä
-    // 3. Jos naapuria ei löytynyt, otetaan pinosta aikaisemmin vierailtu solu
-    // 4. Toistetaan askelia 1-3 kunnes pino on tyhjä
 
     @Override
     public void generate() {

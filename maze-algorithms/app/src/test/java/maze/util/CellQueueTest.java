@@ -13,7 +13,7 @@ public class CellQueueTest {
     public void setup() {
         cellQueue = new CellQueue();
         for (int i = 0; i < 50; i++) {
-            cellQueue.push(new Cell(i, i));
+            cellQueue.enqueue(new Cell(i, i));
         }
     }
 

@@ -15,10 +15,22 @@ public class Cell {
         this.y = y;
     }
 
-    private Cell getNeighbourIfExists(CellList cells, Cell neighbour) {
-        return cells.contains(neighbour) ? cells.get(cells.indexOf(neighbour)) : null;
+    /**
+     * Palauttaa solun, jos se kuuluu labyrinttiin
+     * 
+     * @param cells lista kaikista soluista
+     * @param cell  solu, jonka olemassaolo halutaan selvittää
+     * @return Cell
+     */
+    private Cell getCellIfExists(CellList cells, Cell cell) {
+        return cells.contains(cell) ? cells.get(cells.indexOf(cell)) : null;
     }
 
+    /**
+     * Poistaa seinän solun ja naapurin väliltä
+     * 
+     * @param neighbour
+     */
     public void removeWall(Cell neighbour) {
         int x = this.x - neighbour.getX();
         int y = this.y - neighbour.getY();
@@ -44,7 +56,12 @@ public class Cell {
         }
     }
 
-    // Vaaka- ja pystyakselin naapurit
+    /**
+     * Palauttaa solun kaikki naapurit x- ja y-akselilla
+     * 
+     * @param cells
+     * @return CellList
+     */
     public CellList getNeighbours(CellList cells) {
         CellList neighbours = new CellList();
 
@@ -69,6 +86,12 @@ public class Cell {
         return neighbours;
     }
 
+    /**
+     * Palauttaa listan naapurisoluja, joissa ei ole vierailtu
+     * 
+     * @param cells
+     * @return CellList
+     */
     public CellList getUnvisitedNeighbours(CellList cells) {
         CellList neighbours = getNeighbours(cells);
         CellList unvisitedNeighbours = new CellList();
@@ -83,6 +106,13 @@ public class Cell {
         return unvisitedNeighbours;
     }
 
+    /**
+     * Palauttaa listan naapurisoluja, joissa ei ole vierailtu ja joiden välissä ei
+     * ole seinää
+     * 
+     * @param cells
+     * @return CellList
+     */
     public CellList getUnvisitedValidMoveNeighbours(CellList cells) {
         CellList neighbours = getUnvisitedNeighbours(cells);
         CellList validNeighbours = new CellList();
@@ -96,6 +126,12 @@ public class Cell {
         return validNeighbours;
     }
 
+    /**
+     * Palauttaa listan naapurisoluja, joissa on vierailtu
+     * 
+     * @param cells
+     * @return CellList
+     */
     public CellList getVisitedNeighbours(CellList cells) {
         CellList neighbours = getNeighbours(cells);
         CellList visitedNeighbours = new CellList();
@@ -109,6 +145,13 @@ public class Cell {
         return visitedNeighbours;
     }
 
+    /**
+     * Palauttaa totuusarvon onko solun ja naapurisolun välillä reittiä, eli ei
+     * seinää
+     * 
+     * @param neighbour naapuri solu
+     * @return boolean
+     */
     public boolean isPath(Cell neighbour) {
         int x = this.x - neighbour.getX();
         int y = this.y - neighbour.getY();
@@ -132,16 +175,21 @@ public class Cell {
         }
     }
 
+    /**
+     * @param cells     lista labyrintin kaikista soluista
+     * @param direction suunta josta naapuri halutaan hakea
+     * @return Cell
+     */
     public Cell getNeighbour(CellList cells, Direction direction) {
         switch (direction) {
             case TOP:
-                return getNeighbourIfExists(cells, new Cell(x, y - 1));
+                return getCellIfExists(cells, new Cell(x, y - 1));
             case RIGHT:
-                return getNeighbourIfExists(cells, new Cell(x + 1, y));
+                return getCellIfExists(cells, new Cell(x + 1, y));
             case LEFT:
-                return getNeighbourIfExists(cells, new Cell(x - 1, y));
+                return getCellIfExists(cells, new Cell(x - 1, y));
             case BOTTOM:
-                return getNeighbourIfExists(cells, new Cell(x, y + 1));
+                return getCellIfExists(cells, new Cell(x, y + 1));
             default:
                 return null;
         }
@@ -155,6 +203,10 @@ public class Cell {
         bfsShortestPath = false;
     }
 
+    /**
+     * @param o
+     * @return boolean
+     */
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -166,102 +218,162 @@ public class Cell {
         return Integer.compare(x, cell.x) == 0 && Integer.compare(y, cell.y) == 0;
     }
 
+    /**
+     * @return String
+     */
     @Override
     @ExcludeFromJacocoGeneratedReport
     public String toString() {
         return "(" + x + ", " + y + ")";
     }
 
+    /**
+     * @return boolean[]
+     */
     @ExcludeFromJacocoGeneratedReport
     public boolean[] getWalls() {
         return walls;
     }
 
+    /**
+     * @param walls
+     */
     @ExcludeFromJacocoGeneratedReport
     public void setWalls(boolean[] walls) {
         this.walls = walls;
     }
 
+    /**
+     * @return boolean
+     */
     @ExcludeFromJacocoGeneratedReport
     public boolean notVisited() {
         return !visited;
     }
 
+    /**
+     * @return boolean
+     */
     @ExcludeFromJacocoGeneratedReport
     public boolean isVisited() {
         return visited;
     }
 
+    /**
+     * @param visited
+     */
     @ExcludeFromJacocoGeneratedReport
     public void setVisited(boolean visited) {
         this.visited = visited;
     }
 
+    /**
+     * @return int
+     */
     @ExcludeFromJacocoGeneratedReport
     public int getX() {
         return x;
     }
 
+    /**
+     * @param x
+     */
     @ExcludeFromJacocoGeneratedReport
     public void setX(int x) {
         this.x = x;
     }
 
+    /**
+     * @return int
+     */
     @ExcludeFromJacocoGeneratedReport
     public int getY() {
         return y;
     }
 
+    /**
+     * @param y
+     */
     @ExcludeFromJacocoGeneratedReport
     public void setY(int y) {
         this.y = y;
     }
 
+    /**
+     * @return boolean
+     */
     @ExcludeFromJacocoGeneratedReport
     public boolean isCursor() {
         return cursor;
     }
 
+    /**
+     * @param cursor
+     */
     @ExcludeFromJacocoGeneratedReport
     public void setCursor(boolean cursor) {
         this.cursor = cursor;
     }
 
+    /**
+     * @return boolean
+     */
     @ExcludeFromJacocoGeneratedReport
     public boolean isRecursiveVisit() {
         return recursiveVisit;
     }
 
+    /**
+     * @param recursiveVisit
+     */
     @ExcludeFromJacocoGeneratedReport
     public void setRecursiveVisit(boolean recursiveVisit) {
         this.recursiveVisit = recursiveVisit;
     }
 
+    /**
+     * @return Cell
+     */
     @ExcludeFromJacocoGeneratedReport
     public Cell getParent() {
         return parent;
     }
 
+    /**
+     * @param parent
+     */
     @ExcludeFromJacocoGeneratedReport
     public void setParent(Cell parent) {
         this.parent = parent;
     }
 
+    /**
+     * @return boolean
+     */
     @ExcludeFromJacocoGeneratedReport
     public boolean isBfsShortestPath() {
         return bfsShortestPath;
     }
 
+    /**
+     * @param bfsShortestPath
+     */
     @ExcludeFromJacocoGeneratedReport
     public void setBfsShortestPath(boolean bfsShortestPath) {
         this.bfsShortestPath = bfsShortestPath;
     }
 
+    /**
+     * @return int
+     */
     @ExcludeFromJacocoGeneratedReport
     public int getId() {
         return id;
     }
 
+    /**
+     * @param id
+     */
     @ExcludeFromJacocoGeneratedReport
     public void setId(int id) {
         this.id = id;

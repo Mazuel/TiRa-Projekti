@@ -8,6 +8,20 @@ import maze.util.CellStack;
 import maze.util.DisjointSet;
 import maze.util.GeneratorAlgorithm;
 
+/**
+ * Kruskalin algoritmi </br>
+ * 
+ * 1. Luodaan jokaiselle solulle oma joukko, pusketaan solut pinoon ja laitetaan
+ * pino satunnaiseen järjestykseen </br>
+ * 
+ * 2. Otetaan pinosta solu ja asetetaan se vierailluksi </br>
+ * 
+ * 3. Käydään solun naapurit läpi. Jos naapuri kuuluu eri joukkoon kuin nykyinen
+ * solu, poistetaan seinä näiden väliltä ja yhdistetään joukot </br>
+ * 
+ * 4. Algoritmin suoritus loppuu kun pino on tyhjä
+ * 
+ */
 public class KruskalsGenerator implements GeneratorAlgorithm {
 
     private CellStack stack;
@@ -39,11 +53,10 @@ public class KruskalsGenerator implements GeneratorAlgorithm {
             Cell neighbour = neighbours.get(i);
             if (disjointSet.find(currentCell.getId()) != disjointSet.find(neighbour.getId())) {
                 currentCell.removeWall(neighbour);
+                neighbour.setVisited(true);
                 disjointSet.union(currentCell.getId(), neighbour.getId());
             }
         }
-
-        stack.shuffle();
 
         if (stack.isEmpty()) {
             Maze.generated = true;

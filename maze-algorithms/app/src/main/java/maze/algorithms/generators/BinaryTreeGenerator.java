@@ -9,6 +9,18 @@ import maze.util.CellList;
 import maze.util.Direction;
 import maze.util.GeneratorAlgorithm;
 
+/**
+ * Binääripuu -algoritmi </br>
+ * 1. Valitaan aloitussoluksi viimeinen solu (tässä tapauksessa oikea
+ * alakulma)</br>
+ * 2. Jos löytyy ylänaapuri ja vasemman puoleinen naapuri, valitaan
+ * satunnaisesti kumman välillä poistetaan seinä</br>
+ * 3. Jos löytyy vain toinen naapuri, valitaan se ja jos ei löydy yhtäkään
+ * naapuria niin ei tapahdu mitään</br>
+ * 4. Valitaan nykyiseksi soluksi järjestyksessä edellinen solu, koska
+ * aloitettiin taulukon viimeisestä solusta</br>
+ * 5. Toistetaan kohtia 2-4, kunnes jokaisessa solussa on vieraltu kerran
+ */
 public class BinaryTreeGenerator implements GeneratorAlgorithm {
 
     private int index;
@@ -24,15 +36,6 @@ public class BinaryTreeGenerator implements GeneratorAlgorithm {
         this.currentCell = grid.get(index);
     }
 
-    // Algoritmi
-    // 1. Valitaan aloitussoluksi viimeinen solu (tässä tapauksessa oikea alakulma)
-    // 2. Jos löytyy ylänaapuri ja vasemman puoleinen naapuri, valitaan
-    // satunnaisesti kumman välillä poistetaan seinä
-    // 3. Jos löytyy vain toinen naapuri, valitaan se ja jos ei löydy yhtäkään
-    // naapuria niin ei tapahdu mitään
-    // 4. Valitaan nykyiseksi soluksi järjestyksessä edellinen solu, koska
-    // aloitettiin taulukon viimeisestä solusta
-    // 5. Toistetaan kohtia 2-4, kunnes jokaisessa solussa on vieraltu kerran
     @Override
     public void generate() {
         if (previousCell != null) {

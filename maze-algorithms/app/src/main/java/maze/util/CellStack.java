@@ -13,6 +13,12 @@ public class CellStack {
         top = -1;
     }
 
+    /**
+     * Pusketaan pinoon solu
+     * 
+     * @throws StackOverflowError
+     * @param cell
+     */
     public void push(Cell cell) {
         if (top == capacity - 1) {
             throw new StackOverflowError("Cannot push to full stack");
@@ -20,6 +26,12 @@ public class CellStack {
         cellArray[++top] = cell;
     }
 
+    /**
+     * Poistetaan pinosta päällimmäinen solu
+     * 
+     * @throws StackEmptyError
+     * @return Cell
+     */
     public Cell pop() {
         if (isEmpty()) {
             throw new StackEmptyError("Cannot pop from empty stack");
@@ -27,18 +39,34 @@ public class CellStack {
         return cellArray[top--];
     }
 
+    /**
+     * Palauttaa pinon koon
+     * 
+     * @return int
+     */
     public int size() {
         return top + 1;
     }
 
+    /**
+     * Palauttaa totuusarvon siitä onko pino tyhjä
+     * 
+     * @return boolean
+     */
     public boolean isEmpty() {
         return top == -1;
     }
 
+    /**
+     * @return boolean
+     */
     public boolean isNotEmpty() {
         return !isEmpty();
     }
 
+    /**
+     * Sekoittaa pinon satunnaiseen järjestykseen
+     */
     public void shuffle() {
         Random random = new Random();
         for (int i = top; i > 0; i--) {
@@ -50,6 +78,9 @@ public class CellStack {
         }
     }
 
+    /**
+     * @return String
+     */
     @Override
     @ExcludeFromJacocoGeneratedReport
     public String toString() {

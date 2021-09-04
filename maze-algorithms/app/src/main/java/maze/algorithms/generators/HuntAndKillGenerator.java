@@ -8,6 +8,29 @@ import maze.util.Cell;
 import maze.util.CellList;
 import maze.util.GeneratorAlgorithm;
 
+/**
+ * 'Metsästä ja tapa' -algoritmi </br>
+ * 
+ * 
+ * 1. Valitaan jokin aloitus solu </br>
+ * 
+ * 2. Asetetaan aloitussolu vierailluksi, ja suoritetaan satunnainen kävely,
+ * kunnes ajaudutaan umpikujaan </br>
+ * 
+ * 3. Siirrytään 'metsästys' -moodiin, jossa käydään labyrintin soluja läpi,
+ * kunnes löytyy sellainen solu, jossa ei ole vierailtu ja sillä on ainakin yksi
+ * naapuri, jossa on vierailtu. Jos tälläinen solu löytyi, poistetaan seinä
+ * tämän ja satunnaisesti valitun vieraillun naapurin väliltä ja asetetaan tämä
+ * solu uudeksi 'aloitussoluksi' </br>
+ * 
+ * 4. Suoritetaan askelia 2 ja 3, kunnes jokaisessa solussa on vierailtu </br>
+ * </br>
+ * Tämö ei toimi täysin niin kuin sen pitäisi, koska olen toteuttanut algorimien
+ * suorittamisen vähän väärällä tavalla. Suorittamisen pitäisi oikeassa
+ * versiossa loppua, kun 'metsästys'-moodi ei löydä enää yhtäkään solua. Nyt se
+ * lopetataan kun kaikissa soluissa on vierailtu.
+ * 
+ */
 public class HuntAndKillGenerator implements GeneratorAlgorithm {
 
     private CellList grid;

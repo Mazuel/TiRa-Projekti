@@ -104,6 +104,11 @@ public class Maze {
         this.mainFrame = mainFrame;
     }
 
+    /**
+     * @param mazeRows
+     * @param mazeColumns
+     * @return JPanel
+     */
     private JPanel createMazeBorder(int mazeRows, int mazeColumns) {
         JPanel mazeBorder = new JPanel();
         int borderSize = 20;
@@ -113,12 +118,24 @@ public class Maze {
         return mazeBorder;
     }
 
+    /**
+     * Luo itse labyrintin
+     * 
+     * @param mazeRows
+     * @param mazeColumns
+     * @return MazeGridPanel
+     */
     private MazeGridPanel createMazeGridPanel(int mazeRows, int mazeColumns) {
         MazeGridPanel mazeGrid = new MazeGridPanel(mazeRows, mazeColumns);
         mazeGrid.setBackground(Color.GRAY);
         return mazeGrid;
     }
 
+    /**
+     * Luo vaihtoehdot eri algoritmeille alasvetovalikkoon
+     * 
+     * @return JComboBox<AlgorithmComboItem>
+     */
     private JComboBox<AlgorithmComboItem> createAlgorithmOptions() {
         JComboBox<AlgorithmComboItem> algorithmOptions = new JComboBox<AlgorithmComboItem>();
         algorithmOptions.setBounds(0, 0, CELL_SIZE, CELL_SIZE);
@@ -135,6 +152,13 @@ public class Maze {
         return algorithmOptions;
     }
 
+    /**
+     * Asettaa ja luo tarvittavat nappulat oikeisiin paikkoihin
+     * 
+     * @param mazeGridPanel
+     * @param algorithmOptions
+     * @return JPanel
+     */
     private JPanel createButtonLayout(MazeGridPanel mazeGridPanel, JComboBox<AlgorithmComboItem> algorithmOptions) {
         JButton runButton = new JButton("Suorita");
         JButton resetButton = new JButton("Resetoi näkymä");
@@ -236,11 +260,23 @@ public class Maze {
         return buttonCards;
     }
 
+    /**
+     * Resetoi näkymän
+     * 
+     * @param gridPanel
+     */
     private void resetGUI(MazeGridPanel gridPanel) {
         gridPanel.resetGrid();
         gridPanel.repaint();
     }
 
+    /**
+     * Luo ajastimen algoritmin askelien väliin käyttöliittymästä valitulla
+     * viiveellä
+     * 
+     * @param algorithm
+     * @param mazeGridPanel
+     */
     public void createAndStartGeneratorTimer(GeneratorAlgorithm algorithm, MazeGridPanel mazeGridPanel) {
         Timer timer = new Timer(algorithmSpeed, null);
         generatorInAction = true;

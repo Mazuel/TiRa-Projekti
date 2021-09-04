@@ -30,11 +30,17 @@ public class MazeGridPanel extends JPanel {
         }
     }
 
+    /**
+     * @return Dimension
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(Maze.WIDTH + 1, Maze.HEIGHT + 1);
     }
 
+    /**
+     * @param graphics
+     */
     @Override
     protected void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
@@ -43,6 +49,10 @@ public class MazeGridPanel extends JPanel {
         }
     }
 
+    /**
+     * @param algorithm
+     * @return GeneratorAlgorithm
+     */
     public GeneratorAlgorithm createAlgorithm(AlgorithmOption algorithm) {
         switch (algorithm) {
             case BINARY_TREE:
@@ -62,6 +72,10 @@ public class MazeGridPanel extends JPanel {
         }
     }
 
+    /**
+     * @param cell
+     * @param graphics
+     */
     @ExcludeFromJacocoGeneratedReport
     public void draw(Cell cell, Graphics graphics) {
         int xLocation = cell.getX() * Maze.CELL_SIZE;
@@ -91,6 +105,12 @@ public class MazeGridPanel extends JPanel {
 
     }
 
+    /**
+     * @param graphics
+     * @param xLocation
+     * @param yLocation
+     * @param cell
+     */
     @ExcludeFromJacocoGeneratedReport
     private void drawWalls(Graphics graphics, int xLocation, int yLocation, Cell cell) {
 
@@ -126,10 +146,16 @@ public class MazeGridPanel extends JPanel {
         }
     }
 
+    /**
+     * @return CellList
+     */
     public CellList getGrid() {
         return grid;
     }
 
+    /**
+     * @param grid
+     */
     public void setGrid(CellList grid) {
         this.grid = grid;
     }

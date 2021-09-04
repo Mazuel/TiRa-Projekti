@@ -17,9 +17,13 @@ public class BfsSolver {
         cellQueue = new CellQueue();
         this.startCell = grid.get(0);
         this.endPoint = grid.get(grid.size() - 1);
-        cellQueue.push(startCell);
+        cellQueue.enqueue(startCell);
     }
 
+    /**
+     * Leveyshaku, joka vierailee jokaisessa solussa ja löytää lyhyimmän reitin
+     * alusta loppuun
+     */
     public void solve() {
         Cell currentCell = cellQueue.pop();
         currentCell.setVisited(true);
@@ -33,7 +37,7 @@ public class BfsSolver {
             Cell neighbour = neighbours.get(i);
             neighbour.setVisited(true);
             neighbour.setParent(currentCell);
-            cellQueue.push(neighbour);
+            cellQueue.enqueue(neighbour);
         }
 
         if (cellQueue.isEmpty()) {
@@ -41,6 +45,12 @@ public class BfsSolver {
         }
     }
 
+    /**
+     * Asettaa jokaiselle reitille kuuluvaan soluun totuusarvon, jotta voidaan
+     * visualisoida reitti käyttöliittymässä
+     * 
+     * @param cell
+     */
     private void colorPath(Cell cell) {
         cell.setBfsShortestPath(true);
         Cell parent = cell.getParent();

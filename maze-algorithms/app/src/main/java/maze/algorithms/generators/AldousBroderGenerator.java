@@ -9,6 +9,16 @@ import maze.util.CellList;
 import maze.util.Direction;
 import maze.util.GeneratorAlgorithm;
 
+/**
+ * Todella epäkäytännöllinen algoritmi labyrintin luontiin </br>
+ * 1. Aloittaa satunnaisesta solusta
+ * 
+ * 2. Vaitsee satunnaisesti nykyisen solun naapurin ja poistaa seinän mikäli
+ * solussa ei ole vielä vierailtu. (Samassa solussa voidaan siis vierailla
+ * useampaan otteeseen) </br>
+ * 
+ * 3. Toistetaan vaihetta 2. kunnes kaikissa soluissa on vierailtu </br>
+ */
 public class AldousBroderGenerator implements GeneratorAlgorithm {
 
     private Cell currentCell;
@@ -23,7 +33,6 @@ public class AldousBroderGenerator implements GeneratorAlgorithm {
         this.currentCell = grid.get(startCell);
     }
 
-    // Algoritmi
     @Override
     public void generate() {
 
