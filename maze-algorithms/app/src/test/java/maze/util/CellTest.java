@@ -126,7 +126,7 @@ public class CellTest {
         Cell leftNeighbour = new Cell(11, 10);
         Cell rightNeighbour = new Cell(9, 10);
 
-        leftNeighbour.setVisited(true);
+        testGrid.markCellAsVisited(leftNeighbour);
 
         testGrid.add(currentCell);
         testGrid.add(topNeighbour);
@@ -146,8 +146,8 @@ public class CellTest {
         Cell rightNeighbour = new Cell(9, 10);
         Cell farRightNeihbour = new Cell(8, 10);
 
-        leftNeighbour.setVisited(true);
-        rightNeighbour.setVisited(true);
+        testGrid.markCellAsVisited(leftNeighbour);
+        testGrid.markCellAsVisited(rightNeighbour);
 
         testGrid.add(currentCell);
         testGrid.add(topNeighbour);
@@ -202,7 +202,7 @@ public class CellTest {
         leftNeighbour.setWalls(new boolean[] { true, true, true, false });
         rightNeighbour.setWalls(new boolean[] { true, true, true, true });
 
-        rightNeighbour.setVisited(true);
+        testGrid.markCellAsVisited(rightNeighbour);
 
         testGrid.add(currentCell);
         testGrid.add(topNeighbour);
@@ -212,6 +212,22 @@ public class CellTest {
         testGrid.add(farRightNeihbour);
 
         assertEquals(1, currentCell.getUnvisitedValidMoveNeighbours(testGrid).size());
+    }
+
+    @Test
+    public void shouldResetCell() {
+        Cell cell = new Cell(10, 10);
+        cell.setBfsShortestPath(true);
+        cell.setCursor(true);
+        cell.setVisited(true);
+        cell.setWalls(new boolean[] { false, false, false, false });
+
+        cell.reset();
+
+        assertFalse(cell.isBfsShortestPath());
+        assertFalse(cell.isCursor());
+        assertFalse(cell.isVisited());
+        assertTrue(cell.getWalls()[0] && cell.getWalls()[1] && cell.getWalls()[2] && cell.getWalls()[3]);
     }
 
 }

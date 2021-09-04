@@ -4,10 +4,10 @@ public class Cell {
     private int x, y, id;
 
     private boolean visited = false;
-    private int TOP = 0;
-    private int RIGHT = 1;
-    private int BOTTOM = 2;
-    private int LEFT = 3;
+    private final int TOP = 0;
+    private final int RIGHT = 1;
+    private final int BOTTOM = 2;
+    private final int LEFT = 3;
     private boolean[] walls = { true, true, true, true };
     private boolean cursor = false;
     private boolean deadEnd = false;
@@ -199,7 +199,7 @@ public class Cell {
         }
     }
 
-    public void resetCell() {
+    public void reset() {
         walls = new boolean[] { true, true, true, true };
         cursor = false;
         visited = false;
@@ -331,7 +331,7 @@ public class Cell {
      * @param recursiveVisit
      */
     @ExcludeFromJacocoGeneratedReport
-    public void setRecursiveVisit(boolean deadEnd) {
+    public void setDeadEnd(boolean deadEnd) {
         this.deadEnd = deadEnd;
     }
 

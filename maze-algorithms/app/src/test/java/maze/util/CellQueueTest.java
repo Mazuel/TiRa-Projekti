@@ -13,7 +13,7 @@ public class CellQueueTest {
     public void setup() {
         cellQueue = new CellQueue();
         for (int i = 0; i < 50; i++) {
-            cellQueue.enqueue(new Cell(i, i));
+            cellQueue.add(new Cell(i, i));
         }
     }
 
@@ -24,10 +24,10 @@ public class CellQueueTest {
 
     @Test
     public void shouldPopCorrectCellFromQueue() {
-        cellQueue.pop();
-        cellQueue.pop();
-        cellQueue.pop();
-        Cell cell = cellQueue.pop();
+        cellQueue.remove();
+        cellQueue.remove();
+        cellQueue.remove();
+        Cell cell = cellQueue.remove();
         assertEquals(3, cell.getX());
         assertEquals(3, cell.getY());
         assertEquals(46, cellQueue.size());

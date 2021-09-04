@@ -73,7 +73,7 @@ public class CellList {
     public void setAllUnvisited() {
         for (int i = 0; i < size; i++) {
             cells[i].setVisited(false);
-            cells[i].setRecursiveVisit(false);
+            cells[i].setDeadEnd(false);
         }
         resetVisitedCells();
     }
@@ -90,12 +90,14 @@ public class CellList {
         // }
         // }
         // return true;
-        return visitedCells == size - 1 ? true : false;
+        return visitedCells == size ? true : false;
     }
 
     public void markCellAsVisited(Cell cell) {
-        cell.setVisited(true);
-        visitedCells++;
+        if (!cell.isVisited()) {
+            cell.setVisited(true);
+            visitedCells++;
+        }
     }
 
     /**

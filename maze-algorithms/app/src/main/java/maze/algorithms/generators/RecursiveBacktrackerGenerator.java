@@ -54,11 +54,11 @@ public class RecursiveBacktrackerGenerator implements GeneratorAlgorithm {
             currentCell = nextDirection;
         } else if (cellStack.isNotEmpty()) {
             // 3
-            currentCell.setRecursiveVisit(true);
+            currentCell.setDeadEnd(true);
             currentCell = cellStack.pop();
         } else {
             // 4
-            currentCell.setRecursiveVisit(true);
+            currentCell.setDeadEnd(true);
             Maze.generated = true;
         }
     }

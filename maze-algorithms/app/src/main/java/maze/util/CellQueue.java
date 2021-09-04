@@ -21,7 +21,7 @@ public class CellQueue {
      * 
      * @param cell
      */
-    public void enqueue(Cell cell) {
+    public void add(Cell cell) {
         if (isFull()) {
             ensureCapacity();
         }
@@ -38,7 +38,7 @@ public class CellQueue {
      * @throws QueueEmptyException
      * @return Cell
      */
-    public Cell pop() {
+    public Cell remove() {
         if (isEmpty()) {
             throw new QueueEmptyException("Cannot remove from empty queue");
         }

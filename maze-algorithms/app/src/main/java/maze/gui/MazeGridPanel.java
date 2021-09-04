@@ -142,7 +142,7 @@ public class MazeGridPanel extends JPanel {
 
     public void resetGrid() {
         for (int i = 0; i < grid.size(); i++) {
-            grid.get(i).resetCell();
+            grid.get(i).reset();
         }
         grid.resetVisitedCells();
     }

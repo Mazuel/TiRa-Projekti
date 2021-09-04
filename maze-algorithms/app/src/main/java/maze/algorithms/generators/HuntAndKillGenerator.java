@@ -35,7 +35,7 @@ public class HuntAndKillGenerator implements GeneratorAlgorithm {
 
     private CellList grid;
     private Cell currentCell;
-    private Random random = new Random();;
+    private Random random = new Random();
 
     public HuntAndKillGenerator(MazeGridPanel gridPanel) {
         this.grid = gridPanel.getGrid();

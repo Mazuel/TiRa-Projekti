@@ -1,6 +1,5 @@
 package maze.algorithm.generators;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
@@ -35,10 +34,11 @@ public class PrimsGeneratorTest {
 
     @Before
     public void setUp() {
-        mazeGridPanel = spy(new MazeGridPanel(32, 32));
+        mazeGridPanel = spy(new MazeGridPanel(6, 6));
         generator = new PrimsGenerator(mazeGridPanel);
         doNothing().when(mazeGridPanel).repaint();
         doNothing().when(timer).start();
+        mazeGridPanel.getGrid().resetVisitedCells();
         Maze.generated = false;
         Maze.solved = false;
     }
@@ -47,14 +47,6 @@ public class PrimsGeneratorTest {
         while (!Maze.generated) {
             generator.generate();
         }
-    }
-
-    @Test
-    public void shouldGenerateMazeAndHaveVisitedAllCells() {
-        assertFalse(mazeGridPanel.getGrid().isAllVisited());
-        generateMaze();
-        assertTrue(Maze.generated);
-        assertTrue(mazeGridPanel.getGrid().isAllVisited());
     }
 
     @Test

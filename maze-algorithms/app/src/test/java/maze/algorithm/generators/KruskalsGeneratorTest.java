@@ -5,9 +5,8 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 
-import java.awt.Graphics;
-
 import javax.swing.Timer;
+import java.awt.Graphics;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -16,13 +15,12 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 
-import maze.algorithms.generators.AldousBroderGenerator;
+import maze.algorithms.generators.KruskalsGenerator;
 import maze.algorithms.solvers.BfsSolver;
 import maze.gui.Maze;
 import maze.gui.MazeGridPanel;
 
-// Tämä luokka saattaa hidastaa testien ajamista huomattavasti, koska algoritmin suoritusaika on hyvin satunnainen
-public class AldousBroderGeneratorTest {
+public class KruskalsGeneratorTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
@@ -32,12 +30,12 @@ public class AldousBroderGeneratorTest {
     private Timer timer;
 
     private MazeGridPanel mazeGridPanel;
-    private AldousBroderGenerator generator;
+    private KruskalsGenerator generator;
 
     @Before
     public void setUp() {
         mazeGridPanel = spy(new MazeGridPanel(32, 32));
-        generator = new AldousBroderGenerator(mazeGridPanel);
+        generator = new KruskalsGenerator(mazeGridPanel);
         doNothing().when(mazeGridPanel).repaint();
         doNothing().when(timer).start();
         mazeGridPanel.getGrid().resetVisitedCells();

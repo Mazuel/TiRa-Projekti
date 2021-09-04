@@ -89,7 +89,7 @@ public class CellListTest {
     @Test
     public void shouldNotHaveVisitedAllCells() {
         for (int i = 0; i < 25; i++) {
-            cellList.get(i).setVisited(true);
+            cellList.markCellAsVisited(cellList.get(i));
         }
         assertFalse(cellList.isAllVisited());
     }
@@ -97,7 +97,7 @@ public class CellListTest {
     @Test
     public void shouldHaveVisitedAllCells() {
         for (int i = 0; i < cellList.size(); i++) {
-            cellList.get(i).setVisited(true);
+            cellList.markCellAsVisited(cellList.get(i));
         }
 
         assertTrue(cellList.isAllVisited());
@@ -106,7 +106,7 @@ public class CellListTest {
     @Test
     public void shouldSetAllCellsUnvisited() {
         for (int i = 0; i < cellList.size(); i++) {
-            cellList.get(i).setVisited(true);
+            cellList.markCellAsVisited(cellList.get(i));
         }
 
         assertTrue(cellList.isAllVisited());

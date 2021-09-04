@@ -38,6 +38,7 @@ public class HuntAndKillGeneratorTest {
         generator = new HuntAndKillGenerator(mazeGridPanel);
         doNothing().when(mazeGridPanel).repaint();
         doNothing().when(timer).start();
+        mazeGridPanel.getGrid().resetVisitedCells();
         Maze.generated = false;
         Maze.solved = false;
     }

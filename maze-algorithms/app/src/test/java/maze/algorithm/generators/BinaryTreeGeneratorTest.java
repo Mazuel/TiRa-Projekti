@@ -39,6 +39,7 @@ public class BinaryTreeGeneratorTest {
         generator = new BinaryTreeGenerator(mazeGridPanel);
         doNothing().when(mazeGridPanel).repaint();
         doNothing().when(timer).start();
+        mazeGridPanel.getGrid().resetVisitedCells();
         Maze.generated = false;
         Maze.solved = false;
     }

@@ -17,7 +17,7 @@ public class BfsSolver {
         cellQueue = new CellQueue();
         this.startCell = grid.get(0);
         this.endPoint = grid.get(grid.size() - 1);
-        cellQueue.enqueue(startCell);
+        cellQueue.add(startCell);
     }
 
     /**
@@ -25,7 +25,7 @@ public class BfsSolver {
      * alusta loppuun
      */
     public void solve() {
-        Cell currentCell = cellQueue.pop();
+        Cell currentCell = cellQueue.remove();
         grid.markCellAsVisited(currentCell);
 
         if (currentCell == endPoint) {
@@ -35,9 +35,8 @@ public class BfsSolver {
         CellList neighbours = currentCell.getUnvisitedValidMoveNeighbours(grid);
         for (int i = 0; i < neighbours.size(); i++) {
             Cell neighbour = neighbours.get(i);
-            grid.markCellAsVisited(neighbour);
             neighbour.setParent(currentCell);
-            cellQueue.enqueue(neighbour);
+            cellQueue.add(neighbour);
         }
 
         if (cellQueue.isEmpty()) {

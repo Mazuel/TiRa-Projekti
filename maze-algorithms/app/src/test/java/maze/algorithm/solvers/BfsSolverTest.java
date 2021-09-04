@@ -1,6 +1,7 @@
 package maze.algorithm.solvers;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.spy;
 
@@ -60,5 +61,22 @@ public class BfsSolverTest {
 
         assertFalse(mazeGridPanel.getGrid().isAllVisited());
 
+    }
+
+    @Test
+    public void shouldHaveVisitedAllCellsOnValidMaze() {
+        BinaryTreeGenerator binaryTreeGenerator = new BinaryTreeGenerator(mazeGridPanel);
+        while (!Maze.generated) {
+            binaryTreeGenerator.generate();
+        }
+        mazeGridPanel.getGrid().setAllUnvisited();
+
+        BfsSolver solver = new BfsSolver(mazeGridPanel);
+
+        while (!Maze.solved) {
+            solver.solve();
+        }
+
+        assertTrue(mazeGridPanel.getGrid().isAllVisited());
     }
 }
