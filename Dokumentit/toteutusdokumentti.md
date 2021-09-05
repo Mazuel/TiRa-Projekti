@@ -43,6 +43,7 @@ Labyrintin ratkaisualgoritmina leveyshaku
 ## Puutteet ja ongelmat
 
 Käyttöliittymän koodi on hieman sekavaa ja sitä voisi parantaa vielä huomattavasti.
+Käyttöliittymässä on myös pieni epäloogisuus, että algoritmin nopeutta ei voi valita enää ratkaisua varten, vaan se ajetaan samalla nopeudella kuin labyrintin luontivaiheessa.
 
 Alla listatut ongelmat liittyvät pitkälti siihen, että lähdin toteuttamaan alusta pitäen koko ohjelmaa vähän väärällä tavalla. Olisi pitänyt olla jokin yleiskuva heti alkuun millaisen rakenteen haluan ohjelmalle.
 
