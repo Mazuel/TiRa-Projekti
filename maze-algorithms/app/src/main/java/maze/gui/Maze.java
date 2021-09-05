@@ -33,7 +33,7 @@ public class Maze {
 
     public static final int WIDTH = 800;
     public static final int HEIGHT = WIDTH; // Sama kuin leveys, jotta voidaan pitää näkymä symmetrisenä.
-    private static int CELL_DIVIDER = 16; // 8, 16, 48, 80
+    private static int CELL_DIVIDER = 48; // 16, 48, 80
     public static int CELL_SIZE = 50;
     public static final int START_CELL = 0;
     private int algorithmSpeed = 1; // viive algoritmien 'askelien' välissä millisekunteina
@@ -57,7 +57,7 @@ public class Maze {
                 CELL_DIVIDER = 80;
             }
         } catch (ArrayIndexOutOfBoundsException eBoundsException) {
-            System.out.println("Labyrintin kokoa ei annettu, käytetään oletuksena pientä");
+            System.out.println("Labyrintin kokoa ei annettu, käytetään oletuksena keskikokoista");
         }
         CELL_SIZE = WIDTH / CELL_DIVIDER;
         new Maze();

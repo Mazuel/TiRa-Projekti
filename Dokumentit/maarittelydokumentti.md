@@ -5,13 +5,19 @@
 ## Toteutus
 - Ohjelma toteutetaan javalla hyödyntäen Swing-kirjastoa
 - Tarkoitus olisi toteuttaa ainakin seuraavat algoritmit labyrintin generointiin liittyen:
-    - Aldous-Broder
-    - Binary Tree
-    - Prim's Algorithm
-- Oman tietorakenteen luonti yksinkertaiselle listalle, johon voi lisätä soluja, joiden avulla visualisoidaan algoritmeja käyttöliittymässä. 
-- Mahdollisesti myös pinolle oma tietorakenne
+  
+    n = labyrintin solujen määrä
+  - Aldous-Broder
+  - Binääripuu
+  - Primin algoritmi 
+  - Satunnaistettu syvyyshaku (Recursive Backtracker)
+  - Metsästä ja tapa (Hunt and kill)
+  - Kruskalin algoritmi
+
+- Yksi labyrintin ratkaisija-algoritmi:
+    - Leveyshaku
 ## Tavoitteet
-- Tavoitteena on toteuttaa labyrintin generointia muutamilla eri algoritmeilla ja visualisoida niiden toiminta käyttäjälle.
+- Tavoitteena on toteuttaa labyrintin generointia muutamilla eri algoritmeilla ja visualisoida niiden toimintaa käyttäjälle, sekä osoittaa että luodut labyrintit ovat valideja
 
 ## Opinto-ohjelma
 - Tietojenkäsittelytieteen Kandidaatti (TKT)

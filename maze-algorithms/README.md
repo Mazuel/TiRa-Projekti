@@ -17,3 +17,5 @@ Main-metodi sijaitsee luokassa Maze.java
 
 
 **./gradlew build** -komento ajaa testit, checkstylen, jacoco-raportin ja luo suoritettavan jar-tiedoston
+
+**./gradlew test** -komento ajaa pelkästään yksikkötestit
